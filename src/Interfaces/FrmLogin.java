@@ -192,19 +192,17 @@ public class FrmLogin extends javax.swing.JFrame {
     public void Logueo(String usuario, String password) {
         try {
 
-            String sql = "SELECT * FROM usuario WHERE usuario='" + usuario + "' and password='" + password + "'";
+            String sql = "SELECT * FROM usuarios WHERE usuario='" + usuario + "' and password='" + password + "'";
             st = conn.createStatement();
             rs = st.executeQuery(sql);
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Bienvenido(a) \n" + rs.getString("nombre") + " " + rs.getString("paterno") + " " + rs.getString("materno"));
+                JOptionPane.showMessageDialog(null, "Bienvenido(a)");
                 switch (jcb_perfiles.getSelectedIndex()) {
                     case 1 -> {
-                        FrmUsuarios usuarios = new FrmUsuarios();
-                        usuarios.setVisible(true);
-                        usuarios.lbl_nombre.setText(rs.getString("nombre"));
-                        usuarios.lbl_paterno.setText(rs.getString("paterno"));
-                        usuarios.lbl_materno.setText(rs.getString("materno"));
+                        MenuAdministrador admin = new MenuAdministrador();
+                        admin.setVisible(true);
+                        admin.lbl_usuario.setText(rs.getString("usuario"));                        
                         this.dispose();
                     }
                     case 2 -> {

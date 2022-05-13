@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Interfaces;
 
 import java.awt.HeadlessException;
@@ -12,12 +8,12 @@ import conexion.Conectar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ModificarAlumno extends javax.swing.JFrame {
-
+public class Modificar_Encargado extends javax.swing.JFrame {
+    
     Conectar con = new Conectar();
     Connection conn = con.conexion();
 
-    public ModificarAlumno() {
+    public Modificar_Encargado() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -41,13 +37,10 @@ public class ModificarAlumno extends javax.swing.JFrame {
         txt_materno = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txt_nombre = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        txt_telefono = new javax.swing.JTextField();
         btn_cancelar = new javax.swing.JButton();
         btn_modificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -62,8 +55,6 @@ public class ModificarAlumno extends javax.swing.JFrame {
         jLabel4.setText("Apellido Materno");
 
         jLabel5.setText("Nombre");
-
-        jLabel6.setText("Numero telefonico:");
 
         btn_cancelar.setBackground(new java.awt.Color(255, 51, 51));
         btn_cancelar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -96,12 +87,17 @@ public class ModificarAlumno extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
+                        .addComponent(btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(27, 27, 27)
-                                .addComponent(txt_paterno))
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,25 +106,17 @@ public class ModificarAlumno extends javax.swing.JFrame {
                                         .addComponent(jLabel1))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(59, 59, 59)
-                                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(27, 27, 27)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_nombre)
-                                    .addComponent(txt_materno)))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_materno, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(txt_telefono, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(btn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                        .addComponent(btn_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txt_paterno, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,23 +127,19 @@ public class ModificarAlumno extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_paterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txt_materno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_modificar)
                     .addComponent(btn_cancelar))
@@ -182,60 +166,55 @@ public class ModificarAlumno extends javax.swing.JFrame {
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         this.dispose();
-       Registro_Alumnos panal;
+        RegistroEncargados regen;
         try {
-            panal = new Registro_Alumnos();
-            panal.setVisible(true);
+            regen = new RegistroEncargados();
+            regen.setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(ModificarAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Modificar_Encargado.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         try {
             Modificar();
         } catch (SQLException ex) {
-            Logger.getLogger(ModificarAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Modificar_Encargado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btn_modificarActionPerformed
 
-
-    public void recibir(String id, String paterno, String materno, String nombre, String telefono) {
+   public void recibir(String id, String paterno, String materno, String nombre) {
         txt_id.setText(id);
         txt_paterno.setText(paterno);
         txt_materno.setText(materno);
-        txt_nombre.setText(nombre);
-        txt_telefono.setText(telefono);
+        txt_nombre.setText(nombre);        
     }
 
     public void Modificar() throws SQLException {
         MenuControlEscolar encargado = new MenuControlEscolar();
-        Registro_Alumnos panal = new Registro_Alumnos();
+        RegistroEncargados regen = new RegistroEncargados();
         String id = txt_id.getText();
         String paterno = txt_paterno.getText();
         String materno = txt_materno.getText();
-        String nombre = txt_nombre.getText();
-        String telefono = txt_telefono.getText();
+        String nombre = txt_nombre.getText();        
 
         PreparedStatement pst = null;
         try {
-            pst = conn.prepareStatement("UPDATE alumno SET paterno='" + paterno
-                    + "',materno='" + materno + "',nombre='" + nombre + "',telefono='" + telefono + "' WHERE id_alumno='" + id + "'");
+            pst = conn.prepareStatement("UPDATE encargado SET paterno='" + paterno
+                    + "',materno='" + materno + "',nombre='" + nombre +  "' WHERE id_encargado='" + id + "'");
             int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACION", 0);
             if (s == 0) {
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS CORRECTAMENTE"); 
-                panal.MostrarRegistros("");
-                panal.setVisible(true);                
+                regen.MostrarRegistros("");
+                regen.setVisible(true);                
                 this.dispose();                
             }
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "Error inesperado", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
@@ -245,12 +224,10 @@ public class ModificarAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JTextField txt_id;
     public javax.swing.JTextField txt_materno;
     public javax.swing.JTextField txt_nombre;
     public javax.swing.JTextField txt_paterno;
-    public javax.swing.JTextField txt_telefono;
     // End of variables declaration//GEN-END:variables
 }
