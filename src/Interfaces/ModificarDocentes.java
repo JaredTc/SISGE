@@ -122,15 +122,7 @@ public class ModificarDocentes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
-//        this.dispose();
-//        Panel_Docentes pandoc;
-//        try {
-//            pandoc = new Panel_Docentes();
-//            pandoc.setVisible(true);
-//        } catch (SQLException ex) {
-//            Logger.getLogger(ModificarDocentes.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
+    this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed

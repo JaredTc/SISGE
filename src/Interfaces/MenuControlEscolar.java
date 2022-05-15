@@ -7,6 +7,7 @@ package Interfaces;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -84,7 +85,7 @@ public class MenuControlEscolar extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 190, 40));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, 190, 40));
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton4.setText("Registro de Docentes");
@@ -100,6 +101,8 @@ public class MenuControlEscolar extends javax.swing.JFrame {
         });
         jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 180, -1));
 
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setText("Inscripciones");
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton3.setText("Reportes");
@@ -107,26 +110,25 @@ public class MenuControlEscolar extends javax.swing.JFrame {
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
         jButton3.setDefaultCapable(false);
-        jButton3.setFocusPainted(false);
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, -1, -1));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
 
-        jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton5.setText("Estadisticas");
+        jButton5.setText("Reinscripciones");
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
         jButton5.setContentAreaFilled(false);
         jButton5.setDefaultCapable(false);
-        jButton5.setFocusPainted(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 180, -1));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/girl and boy sitting with laptop.png"))); // NOI18N
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 160, -1));
+        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -179,11 +181,11 @@ public class MenuControlEscolar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-            Registro_Alumnos alumnos;
+        Registro_Alumnos alumnos;
         try {
             alumnos = new Registro_Alumnos();
-                    jDesktopPane1.add(alumnos);
-        alumnos.show();
+            jDesktopPane1.add(alumnos);
+            alumnos.show();
         } catch (SQLException ex) {
             Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -192,29 +194,53 @@ public class MenuControlEscolar extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:           
-             Registro_Docentes RDocente ;
+        Registro_Docentes RDocente;
         try {
             RDocente = new Registro_Docentes();
-                    jDesktopPane1.add(RDocente);
-        RDocente.show();
+            jDesktopPane1.add(RDocente);
+            RDocente.show();
         } catch (SQLException ex) {
             Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        frmInscripcion inscripcion;
+        try {
+            inscripcion = new frmInscripcion();
+            jDesktopPane1.add(inscripcion);
+            inscripcion.show();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        frmReinscripcion reinscripcion;
+        try {
+            reinscripcion = new frmReinscripcion();
+            jDesktopPane1.add(reinscripcion);
+            reinscripcion.show();
+        } catch (SQLException e) {
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-         FrmLogin login;
-        try {
-            login = new FrmLogin();
-             login.setVisible(true);
-        } catch (SQLException ex) {
-            java.util.logging.Logger.getLogger(MenuAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar el registro?", "CONFIRMACION", 0);
+        if (s == 0) {
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "!!HASTA PRONTO!!");
+            FrmLogin login;
+            try {
+                login = new FrmLogin();
+                login.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
