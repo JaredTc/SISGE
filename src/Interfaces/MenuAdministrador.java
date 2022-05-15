@@ -7,6 +7,7 @@ package Interfaces;
 import java.lang.System.Logger;
 import java.sql.SQLException;
 import java.util.logging.Level;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -55,7 +56,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 230, -1));
 
         jButton9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton9.setText("Crear credencial");
+        jButton9.setText("Crear nuevo usuario");
         jButton9.setBorder(null);
         jButton9.setContentAreaFilled(false);
         jButton9.setDefaultCapable(false);
@@ -76,10 +77,15 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jButton10.setBorder(null);
         jButton10.setDefaultCapable(false);
         jButton10.setFocusPainted(false);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
         jPanel6.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, 190, 40));
 
         jButton11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton11.setText("Gestionar credenciales");
+        jButton11.setText("Gestion de usuarios");
         jButton11.setBorder(null);
         jButton11.setBorderPainted(false);
         jButton11.setContentAreaFilled(false);
@@ -208,6 +214,22 @@ public class MenuAdministrador extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+       int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar el registro?", "CONFIRMACION", 0);
+        if (s == 0) {
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "!!HASTA PRONTO!!");
+            FrmLogin login;
+            try {
+                login = new FrmLogin();
+                login.setVisible(true);
+            } catch (SQLException ex) {
+                java.util.logging.Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,39 +266,17 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JLabel lbl_id;
-    private javax.swing.JLabel lbl_id1;
-    private javax.swing.JLabel lbl_materno;
-    private javax.swing.JLabel lbl_materno1;
-    private javax.swing.JLabel lbl_nombre;
-    private javax.swing.JLabel lbl_nombre1;
-    private javax.swing.JLabel lbl_paterno;
-    private javax.swing.JLabel lbl_paterno1;
     public javax.swing.JLabel lbl_usuario;
     // End of variables declaration//GEN-END:variables
 }
