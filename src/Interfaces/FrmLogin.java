@@ -49,6 +49,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -140,6 +141,9 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/MacBook Pro 14_ - Inicio Sesion.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1290, 680));
 
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 590, 170, 50));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,7 +156,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jcb_perfilesItemStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Logueo(txt_usuario.getText(), txt_password.getText());
+        Logueo(txt_usuario.getText(), txt_password.getText(),Integer.parseInt(lbl_id.getText()));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcb_perfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_perfilesActionPerformed
@@ -189,10 +193,10 @@ public class FrmLogin extends javax.swing.JFrame {
 
     }
 
-    public void Logueo(String usuario, String password) {
+    public void Logueo(String usuario, String password, int rol) {
         try {
 
-            String sql = "SELECT * FROM usuarios WHERE usuario='" + usuario + "' and password='" + password + "'";
+            String sql = "SELECT * FROM usuarios WHERE usuario='" + usuario + "' and password='" + password + "'and id_rol ='"+rol+"'";
             st = conn.createStatement();
             rs = st.executeQuery(sql);
 
@@ -218,7 +222,7 @@ public class FrmLogin extends javax.swing.JFrame {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Usuario y contraseña incorrectos", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (HeadlessException | SQLException e) {
@@ -237,6 +241,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

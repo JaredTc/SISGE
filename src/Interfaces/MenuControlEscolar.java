@@ -7,6 +7,7 @@ package Interfaces;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,6 +39,8 @@ public class MenuControlEscolar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
 
@@ -76,6 +79,11 @@ public class MenuControlEscolar extends javax.swing.JFrame {
         jButton2.setBorder(null);
         jButton2.setDefaultCapable(false);
         jButton2.setFocusPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 590, 190, 40));
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -91,6 +99,32 @@ public class MenuControlEscolar extends javax.swing.JFrame {
             }
         });
         jPanel3.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 180, -1));
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setText("Inscripciones");
+        jButton3.setBorder(null);
+        jButton3.setBorderPainted(false);
+        jButton3.setContentAreaFilled(false);
+        jButton3.setDefaultCapable(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
+
+        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton5.setText("Reinscripciones");
+        jButton5.setBorder(null);
+        jButton5.setBorderPainted(false);
+        jButton5.setContentAreaFilled(false);
+        jButton5.setDefaultCapable(false);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, -1, -1));
 
         jDesktopPane1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -143,11 +177,11 @@ public class MenuControlEscolar extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-            Registro_Alumnos alumnos;
+        Registro_Alumnos alumnos;
         try {
             alumnos = new Registro_Alumnos();
-                    jDesktopPane1.add(alumnos);
-        alumnos.show();
+            jDesktopPane1.add(alumnos);
+            alumnos.show();
         } catch (SQLException ex) {
             Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -156,16 +190,55 @@ public class MenuControlEscolar extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:           
-             Registro_Docentes RDocente ;
+        Registro_Docentes RDocente;
         try {
             RDocente = new Registro_Docentes();
-                    jDesktopPane1.add(RDocente);
-        RDocente.show();
+            jDesktopPane1.add(RDocente);
+            RDocente.show();
         } catch (SQLException ex) {
             Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        frmInscripcion inscripcion;
+        try {
+            inscripcion = new frmInscripcion();
+            jDesktopPane1.add(inscripcion);
+            inscripcion.show();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        frmReinscripcion reinscripcion;
+        try {
+            reinscripcion = new frmReinscripcion();
+            jDesktopPane1.add(reinscripcion);
+            reinscripcion.show();
+        } catch (SQLException e) {
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar el registro?", "CONFIRMACION", 0);
+        if (s == 0) {
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "!!HASTA PRONTO!!");
+            FrmLogin login;
+            try {
+                login = new FrmLogin();
+                login.setVisible(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -205,7 +278,9 @@ public class MenuControlEscolar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
