@@ -4,15 +4,27 @@
  */
 package Interfaces;
 
-
+import Render.Render;
 import conexion.Conectar;
+import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import sisge.Alumno;
 import sisge.Curso;
+import sisge.Docente;
+import sisge.Grupo;
+import sisge.Semestre;
 import sisge.items;
 import sisge.llenarCombos;
 
@@ -21,9 +33,15 @@ import sisge.llenarCombos;
  * @author Jared
  */
 public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
-  Conectar condb = new Conectar();
-    Connection conn = condb.conexion();
 
+    ModificarCalificacion modificar = new ModificarCalificacion();
+    Conectar condb = new Conectar();
+    Connection conn = condb.conexion();
+    PreparedStatement pst;
+    Statement st;
+    ResultSet rs;
+    JButton btnm;
+    JButton btne;
 
     /**
      * Creates new form FrmAltaCalificaciones
@@ -31,6 +49,7 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
     public FrmAltaCalificaciones() {
         initComponents();
         llenarCombox();
+        mostrardatos();
     }
 
     /**
@@ -45,7 +64,7 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbl_calificaciones = new javax.swing.JTable();
         jComboBoxAluno = new javax.swing.JComboBox<>();
         jComboBoxGrupo = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -57,6 +76,10 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
         jComboBoxCurso = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jComboBoxTurno = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
 
         setClosable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,7 +91,7 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
         jLabel1.setText("ALTA DE CALIFICACIONES");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_calificaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -76,9 +99,14 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tbl_calificaciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_calificacionesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tbl_calificaciones);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 630, 310));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 740, 310));
 
         jPanel1.add(jComboBoxAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 170, -1));
 
@@ -91,7 +119,7 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("ID Curso");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
-        jPanel1.add(txtcalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 140, -1));
+        jPanel1.add(txtcalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 140, 30));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Id Alumno");
@@ -104,60 +132,242 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
         jButton1.setBorderPainted(false);
         jButton1.setDefaultCapable(false);
         jButton1.setFocusPainted(false);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 180, 140, -1));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 140, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Calificacion");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, -1));
+        jLabel5.setText("Docente");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, -1, -1));
 
         jPanel1.add(jComboBoxCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 160, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Grupo");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
+        jLabel6.setText("Semestre");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, -1, -1));
 
         jPanel1.add(jComboBoxTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 170, -1));
+
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 120, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("Grupo");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, -1, -1));
+
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 130, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setText("Calificacion");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 840, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    public void llenarCombox(){
-          Conectar.conexion();
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+//        int calificacion = Integer.parseInt(txtcalificacion.getText());
+        String idCurso = (jComboBoxCurso.getItemAt(jComboBoxCurso.getSelectedIndex()).getId());
+        String idAlumno = Integer.toString(jComboBoxAluno.getItemAt(jComboBoxAluno.getSelectedIndex()).getId());
+        String idGrupo = Integer.toString(jComboBoxGrupo.getItemAt(jComboBoxGrupo.getSelectedIndex()).getId());
+        String turno = jComboBoxTurno.getItemAt(jComboBoxTurno.getSelectedIndex()).getId();
+        String Semestre = Integer.toString(jComboBox1.getItemAt(jComboBox1.getSelectedIndex()).getId());
+        String calificacion = txtcalificacion.getText().trim();
+        String docente = Integer.toString(jComboBox2.getItemAt(jComboBox2.getSelectedIndex()).getId());
+
+        Registrar(idCurso, idAlumno, idGrupo, turno, Semestre, calificacion, docente);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tbl_calificacionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_calificacionesMouseClicked
+        // TODO add your handling code here:
+          int column = tbl_calificaciones.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tbl_calificaciones.getRowHeight();
+
+        if (row < tbl_calificaciones.getRowCount() && row >= 0 && column < tbl_calificaciones.getColumnCount() && column >= 0) {
+            Object value = tbl_calificaciones.getValueAt(row, column);
+            if (value instanceof JButton) {
+                ((JButton) value).doClick();
+                JButton boton = (JButton) value;
+
+                if (boton.getName().equals("m")) {
+                    try {
+                        EnviarValores();
+                        //this.dispose();
+
+                        //System.out.println("Click en el boton modificar");
+                        //EVENTOS MODIFICAR
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Registro_Alumnos.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
+            }
+//            if (value instanceof JCheckBox) {
+//                //((JCheckBox)value).doClick();
+//                JCheckBox ch = (JCheckBox) value;
+//                if (ch.isSelected() == true) {
+//                    ch.setSelected(false);
+//                }
+//                if (ch.isSelected() == false) {
+//                    ch.setSelected(true);
+//                }
+//
+//            }
+        }
+    }//GEN-LAST:event_tbl_calificacionesMouseClicked
+
+    public void llenarCombox() {
+        Conectar.conexion();
         llenarCombos CSO = new llenarCombos();
         ArrayList<Curso> cursos = CSO.Course();
         for (int i = 0; i < cursos.size(); i++) {
             jComboBoxCurso.addItem(
-            new Curso(cursos.get(i).getId(), cursos.get(i).getNombre()));
+                    new Curso(cursos.get(i).getId(), cursos.get(i).getNombre()));
         }
-            Conectar.conexion();
-         llenarCombos std = new llenarCombos();
-         ArrayList<Alumno> alumnos = std.Alumnos();
-         for (int i = 0; i < alumnos.size(); i++) {
+        Conectar.conexion();
+        llenarCombos std = new llenarCombos();
+        ArrayList<Alumno> alumnos = std.Alumnos();
+        for (int i = 0; i < alumnos.size(); i++) {
             jComboBoxAluno.addItem(
-            new Alumno(alumnos.get(i).getId(), alumnos.get(i).getNombre()));
+                    new Alumno(alumnos.get(i).getId(), alumnos.get(i).getNombre()));
         }
-         
-         llenarCombos trn = new llenarCombos();
-         ArrayList<items> turno = trn.Turno();
-         for (int i = 0; i < turno.size(); i++) {
+
+        llenarCombos trn = new llenarCombos();
+        ArrayList<items> turno = trn.Turno();
+        for (int i = 0; i < turno.size(); i++) {
             jComboBoxTurno.addItem(
-            new items(turno.get(i).getId(), turno.get(i).getDescripcion()));
+                    new items(turno.get(i).getId(), turno.get(i).getDescripcion()));
         }
-            
+        llenarCombos gpo = new llenarCombos();
+        ArrayList<Grupo> grupo = gpo.Grupos();
+        for (int i = 0; i < grupo.size(); i++) {
+            jComboBoxGrupo.addItem(
+                    new Grupo(grupo.get(i).getId(), grupo.get(i).getGrupo()));
+        }
+        llenarCombos sm = new llenarCombos();
+        ArrayList<Semestre> semestre = sm.Semestre();
+        for (int i = 0; i < semestre.size(); i++) {
+            jComboBox1.addItem(
+                    new Semestre(semestre.get(i).getId(), semestre.get(i).getDescripcion()));
+        }
         
+        llenarCombos doce = new llenarCombos();
+        ArrayList<Docente> docentes = doce.Docente();
+        for (int i = 0; i < docentes.size(); i++) {
+            jComboBox2.addItem(
+            new Docente(docentes.get(i).getId(), docentes.get(i).getNombre()));
+            
+        }
+
     }
 
-    
- 
+    public void mostrardatos() {
+        tbl_calificaciones.setDefaultRenderer(Object.class, new Render());
+        JButton btnm = new JButton("Modificar");
+        btnm.setName("m");
+        JButton btne = new JButton("Eliminar");
+        btne.setName("e");
+        
+        DefaultTableModel Tabgdo = new DefaultTableModel();
+        Tabgdo.addColumn("ID");
+        Tabgdo.addColumn("Curso");
+        Tabgdo.addColumn("Alumno");
+        Tabgdo.addColumn("Grupo");
+        Tabgdo.addColumn("Turno");
+        Tabgdo.addColumn("Semestre");
+        Tabgdo.addColumn("Calificacion");
+        Tabgdo.addColumn("Docente");
+        Tabgdo.addColumn("Accion ");
+
+
+        tbl_calificaciones.setModel(Tabgdo);
+
+        Object[] calificaciones = new Object[9];
+
+        try {
+            String sql = ("SELECT tm.id_toma, c.nombre, al.nombre, gp.grupo, trn.descripcion , tm.calificacion, sm.descripcion, d.nombre\n"
+                    + "	FROM toma tm, curso c, alumno al, grupos gp, turno trn , semestre sm, docente d\n"
+                    + "	WHERE tm.id_curso = c.id_curso\n"
+                    + "	AND tm.id_alumno = al.id_alumno\n"
+                    + "	AND tm.id_grupo = gp.id_grupo\n"
+                    + "	AND tm.id_turno = trn.id_turno\n"
+                    + "	AND tm.id_semestre = sm.id_semestre\n"
+                      + "AND tm.id_docente = d.id_docente\n"
+                    + "	ORDER BY id_toma ASC");
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                calificaciones[0] = rs.getString("tm.id_toma");
+                calificaciones[1] = rs.getString("c.nombre");
+                calificaciones[2] = rs.getString("al.nombre");
+                calificaciones[3] = rs.getString("gp.grupo");
+                calificaciones[4] = rs.getString("trn.descripcion");
+                calificaciones[5] = rs.getString("sm.descripcion");
+                calificaciones[6] = rs.getString("calificacion");
+                calificaciones[7] = rs.getString("d.nombre");
+                calificaciones[8] = btnm;
+       
+
+                Tabgdo.addRow(calificaciones);
+            }
+            tbl_calificaciones.setModel(Tabgdo);
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    public void Registrar(String idCurso, String idAlumno, String idGrupo, String turno, String semestre, String calificacion, String docente) {
+        try {
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO toma (id_curso, id_alumno, id_grupo, id_turno, id_semestre, calificacion, id_docente ) VALUES (?,?,?,?,?,?,?)");
+            pst.setString(1, idCurso);
+            pst.setString(2, idAlumno);
+            pst.setString(3, idGrupo);
+            pst.setString(4, turno);
+            pst.setString(5, semestre);
+            pst.setString(6, calificacion);
+            pst.setString(7, docente);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Registro Exitoso");
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        mostrardatos();
+        txtcalificacion.setText("");
+
+    }
+
+  public void EnviarValores() throws SQLException {
+        modificar.setVisible(true);
+        int fila = tbl_calificaciones.getSelectedRow();
+        if (fila >= 0) {
+            String calificacion  = (String) tbl_calificaciones.getValueAt(fila, 6).toString();
+            String id  = (String) tbl_calificaciones.getValueAt(fila, 0).toString();
+              String grupo = (String) tbl_calificaciones.getValueAt(fila, 3).toString();
+            modificar.Recibir(calificacion,id, grupo);            
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes selecionar una fila de la tabla", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<Semestre> jComboBox1;
+    private javax.swing.JComboBox<Docente> jComboBox2;
     private javax.swing.JComboBox<Alumno> jComboBoxAluno;
     private javax.swing.JComboBox<Curso> jComboBoxCurso;
-    private javax.swing.JComboBox<Curso> jComboBoxGrupo;
+    private javax.swing.JComboBox<Grupo> jComboBoxGrupo;
     private javax.swing.JComboBox<items> jComboBoxTurno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -165,9 +375,15 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tbl_calificaciones;
     private javax.swing.JTextField txtcalificacion;
     // End of variables declaration//GEN-END:variables
+
+    private void Registrar(int id, int id0, int id1, int parseInt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

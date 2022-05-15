@@ -3,13 +3,13 @@ package sisge;
 
 
 public class items {
-        private int id;
+        private String id;
         private String descripcion;
         
         public items(){
             
         }
-        public items(int id, String descripcion){
+        public items(String id, String descripcion){
             this.id = id;
             this.descripcion = descripcion;
             
@@ -17,12 +17,13 @@ public class items {
 
   
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
+        
     }
 
     public String getDescripcion() {

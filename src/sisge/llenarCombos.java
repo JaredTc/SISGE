@@ -6,13 +6,9 @@ package sisge;
 
 
 
-import conexion.Conectar;
+
 import static conexion.Conectar.resultado;
 import static conexion.Conectar.sentencia;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -34,7 +30,7 @@ public class llenarCombos {
         }try {
             while (resultado.next()) {            
                 Curso crso = new Curso();
-                crso.setId(resultado.getInt("id_curso"));
+                crso.setId(resultado.getString("id_curso"));
                 crso.setNombre(resultado.getString("nombre"));
                 curso.add(crso);
             
@@ -78,7 +74,7 @@ public class llenarCombos {
         }try {
             while (resultado.next()) {            
                 items alm = new items();
-                alm.setId(resultado.getInt("id_turno"));
+                alm.setId(resultado.getString("id_turno"));
                 alm.setDescripcion(resultado.getString("descripcion"));
               Items.add(alm);
             
@@ -86,5 +82,68 @@ public class llenarCombos {
         } catch (Exception e) {
         }
       return Items;
+   }
+    public ArrayList<Grupo> Grupos(){
+    ArrayList<Grupo> grupo = new ArrayList<>();
+             String Q = "SELECT *  FROM grupos";
+        try {
+    
+            resultado = sentencia.executeQuery(Q);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }try {
+            while (resultado.next()) {            
+                Grupo alm = new Grupo();
+                alm.setId(resultado.getInt("id_grupo"));
+                alm.setGrupo(resultado.getString("grupo"));
+              grupo.add(alm);
+            
+        }
+        } catch (Exception e) {
+        }
+      return grupo;
+   }
+        public ArrayList<Semestre> Semestre(){
+    ArrayList<Semestre> semestre = new ArrayList<>();
+             String Q = "SELECT *  FROM semestre";
+        try {
+    
+            resultado = sentencia.executeQuery(Q);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }try {
+            while (resultado.next()) {            
+                Semestre alm = new Semestre();
+                alm.setId(resultado.getInt("id_semestre"));
+                alm.setDescripcion(resultado.getString("descripcion"));
+              semestre.add(alm);
+            
+        }
+        } catch (Exception e) {
+        }
+      return semestre;
+   }
+            public ArrayList<Docente> Docente(){
+    ArrayList<Docente> docente = new ArrayList<>();
+             String Q = "SELECT id_docente, nombre  FROM docente";
+        try {
+    
+            resultado = sentencia.executeQuery(Q);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }try {
+            while (resultado.next()) {            
+               Docente alm = new Docente();
+                alm.setId(resultado.getInt("id_docente"));
+                alm.setNombre(resultado.getString("nombre"));
+              docente.add(alm);
+            
+        }
+        } catch (Exception e) {
+        }
+      return docente;
    }
 }

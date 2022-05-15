@@ -6,22 +6,22 @@ package sisge;
  * @author Jared
  */
     public class Curso{
-        private int id;
+        private String id;
         private String nombre;
          public Curso() {
          
         }
             
-        public Curso(int id, String nombre){
+        public Curso(String id, String nombre){
                  this.id = id;
                  this.nombre = nombre;
              }
 
-        public int getId() {
+        public String getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 

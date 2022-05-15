@@ -37,8 +37,9 @@ public class FrmLogin extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jcb_perfiles = new javax.swing.JComboBox<>();
-        lbl_id = new javax.swing.JLabel();
         txt_password = new javax.swing.JPasswordField();
+        jButton2 = new javax.swing.JButton();
+        lbl_id = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -51,6 +52,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Contraseña1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -68,7 +70,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel13.setText("ESCOLAR");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(90, 166, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -80,10 +82,10 @@ public class FrmLogin extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 240, 30));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 470, 240, 30));
 
         jLabel4.setText("SELECCIONAR PERFIL");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
 
         jcb_perfiles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--SELECCIONAR--" }));
         jcb_perfiles.addItemListener(new java.awt.event.ItemListener() {
@@ -96,22 +98,36 @@ public class FrmLogin extends javax.swing.JFrame {
                 jcb_perfilesActionPerformed(evt);
             }
         });
-        getContentPane().add(jcb_perfiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 272, 240, 30));
-
-        lbl_id.setText("id");
-        getContentPane().add(lbl_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 250, 57, -1));
+        getContentPane().add(jcb_perfiles, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, 240, 30));
 
         txt_password.setBackground(new java.awt.Color(246, 246, 246));
         txt_password.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_password.setBorder(null);
         getContentPane().add(txt_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 240, 40));
 
+        jButton2.setBackground(new java.awt.Color(255, 51, 51));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("SALIR");
+        jButton2.setBorderPainted(false);
+        jButton2.setDefaultCapable(false);
+        jButton2.setFocusPainted(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, 240, 30));
+
+        lbl_id.setText("Id");
+        getContentPane().add(lbl_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, -1, -1));
+
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/blue graduation hat(1).png"))); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText("SISTEMA DE GESTION ");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, -1, -1));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Rectangle 85.png"))); // NOI18N
         getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
@@ -159,6 +175,11 @@ public class FrmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcb_perfilesActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     
 
     public void MostrarRoles() throws SQLException {
@@ -192,22 +213,25 @@ public class FrmLogin extends javax.swing.JFrame {
     public void Logueo(String usuario, String password) {
         try {
 
-            String sql = "SELECT * FROM usuario WHERE usuario='" + usuario + "' and password='" + password + "'";
+            String sql = "SELECT * FROM usuarios WHERE usuario='" + usuario + "' and password='" + password + "'";
             st = conn.createStatement();
             rs = st.executeQuery(sql);
 
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Bienvenido(a) \n" + rs.getString("nombre") + " " + rs.getString("paterno") + " " + rs.getString("materno"));
+                JOptionPane.showMessageDialog(null, "Bienvenido(a)");
                 switch (jcb_perfiles.getSelectedIndex()) {
                     case 1 -> {
-                        FrmUsuarios usuarios = new FrmUsuarios();
-                        usuarios.setVisible(true);
-                        usuarios.lbl_nombre.setText(rs.getString("nombre"));
-                        usuarios.lbl_paterno.setText(rs.getString("paterno"));
-                        usuarios.lbl_materno.setText(rs.getString("materno"));
+                        MenuAdministrador admin = new MenuAdministrador();
+                        admin.setVisible(true);
+                        admin.lbl_usuario.setText(rs.getString("usuario"));                        
                         this.dispose();
                     }
                     case 2 -> {
+                        MenuAlumnos alumno = new MenuAlumnos();
+                        alumno.setVisible(true);
+                        alumno.lbl_user.setText(rs.getString("usuario"));
+                            this.dispose();
+                        
                     }
                     case 3 -> {
                        MenuControlEscolar encargado = new MenuControlEscolar();
@@ -215,6 +239,9 @@ public class FrmLogin extends javax.swing.JFrame {
                         this.dispose();
                     }
                     case 4 -> {
+                        MenuDocentes docente = new MenuDocentes();
+                        docente.setVisible(true);
+                        this.dispose();
                     }
                     default -> {
                     }
@@ -234,6 +261,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel Contraseña1;
     private javax.swing.JLabel Usuario;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
