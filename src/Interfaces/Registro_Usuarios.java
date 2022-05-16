@@ -16,14 +16,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Registro_Usuarios extends javax.swing.JInternalFrame {
-
+    
     Conectar condb = new Conectar();
     Connection conn = condb.conexion();
-
+    
     PreparedStatement pst;
     Statement st;
     ResultSet rs;
-
+    
     public Registro_Usuarios() throws SQLException {
         initComponents();
         MostrarRoles();
@@ -230,7 +230,7 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
     private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
         if (txt_password2.getText().equals(txt_password.getText())) {
             RegistrarUsuario();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden: ", "Error en campos", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_crearActionPerformed
@@ -238,7 +238,7 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         Limpiar();
     }//GEN-LAST:event_btn_cancelarActionPerformed
-
+    
     public void MostrarRoles() throws SQLException {
         st = conn.createStatement();
         try {
@@ -250,9 +250,9 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar " + e.getMessage());
         }
-
+        
     }
-
+    
     public void MostrarIdRoles() throws SQLException {
         st = conn.createStatement();
         try {
@@ -265,9 +265,9 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar " + e.getMessage());
         }
     }
-
+    
     public void BuscarIdXRol() throws SQLException {
-
+        
         Statement st = conn.createStatement();
         ResultSet rs;
         try {
@@ -279,7 +279,7 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
                     if (rs.next()) {
                         jPanel1.setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "El alumno no se encuentra registrado en sistema", "Error de datos", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El id de administrador proprocionado no se encuentra registrado en sistema", "Error de datos", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 case 2 -> {
@@ -288,7 +288,7 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
                     if (rs.next()) {
                         jPanel1.setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "El alumno no se encuentra registrado en sistema", "Error de datos", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El id de alumno proporcionado no se encuentra registrado en sistema", "Error de datos", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 case 3 -> {
@@ -297,7 +297,7 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
                     if (rs.next()) {
                         jPanel1.setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "El alumno no se encuentra registrado en sistema", "Error de datos", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El id de encargado proporcionado no se encuentra registrado en sistema", "Error de datos", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 case 4 -> {
@@ -306,7 +306,7 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
                     if (rs.next()) {
                         jPanel1.setVisible(true);
                     } else {
-                        JOptionPane.showMessageDialog(null, "El alumno no se encuentra registrado en sistema", "Error de datos", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "El id de docente proporcionado no se encuentra registrado en sistema", "Error de datos", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 default -> {
@@ -317,30 +317,32 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error en la BD", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    
     public void RegistrarUsuario() {
-
-        String sql = "INSERT INTO usuarios (usuario, password, id_rol) VALUES (?,?,?)";
+        
+        String sql = "INSERT INTO usuarios (usuario, password, id_rol, id_miembro) VALUES (?,?,?,?)";
         try {            
-                st = conn.createStatement();
-                rs = st.executeQuery("SELECT * FROM usuarios WHERE  usuario LIKE '" + txt_usuario.getText() + "' AND password LIKE '" + txt_password2.getText() + "' AND id_rol LIKE '" + Integer.parseInt(lbl_idrol.getText()) + "'");
-                if (rs.next()) {
-                    JOptionPane.showMessageDialog(null, "Ya existe una credencial con estos datos", "ERROR DE REGISTRO", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    pst = conn.prepareStatement(sql);
-                    pst.setString(1, txt_usuario.getText());
-                    pst.setString(2, txt_password2.getText());
-                    pst.setInt(3, Integer.parseInt(lbl_idrol.getText()));
-                    pst.executeUpdate();
-                    JOptionPane.showMessageDialog(null, "La credencial para el id de alumno: " + txt_busqueda.getText() + " con id de rol: " + Integer.parseInt(lbl_idrol.getText()) + " se creo con exito");
-                    Limpiar();
-                }
+            st = conn.createStatement();
+            rs = st.executeQuery("SELECT * FROM usuarios WHERE  usuario LIKE '" + txt_usuario.getText() + "' AND password LIKE '"
+                    + txt_password2.getText() + "' AND id_rol LIKE '" + Integer.parseInt(lbl_idrol.getText()) + "'AND id_miembro LIKE '" + Integer.parseInt(txt_busqueda.getText()) + "'");
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Ya existe una credencial con estos datos", "ERROR DE REGISTRO", JOptionPane.ERROR_MESSAGE);
+            } else {
+                pst = conn.prepareStatement(sql);
+                pst.setString(1, txt_usuario.getText());
+                pst.setString(2, txt_password2.getText());
+                pst.setInt(3, Integer.parseInt(lbl_idrol.getText()));
+                pst.setInt(4, Integer.parseInt(txt_busqueda.getText()));
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "La credencial para el id de alumno: " + txt_busqueda.getText() + " con id de rol: " + Integer.parseInt(lbl_idrol.getText()) + " se creo con exito");
+                Limpiar();
+            }
         } catch (HeadlessException | NumberFormatException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al ingresar registro: " + e.getMessage(), "Error en la BD", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    public void Limpiar(){
+    public void Limpiar() {
         txt_busqueda.setText("");
         txt_password.setText("");
         txt_password2.setText("");

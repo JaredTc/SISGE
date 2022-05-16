@@ -25,7 +25,7 @@ public class frmReinscripcion extends javax.swing.JInternalFrame {
     JButton btne;
 
     Conectar condb = new Conectar();
-    Connection conn = condb.conexion();
+    Connection conn = Conectar.conexion();
 
     PreparedStatement pst;
     Statement st;
