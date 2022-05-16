@@ -16,12 +16,16 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.mysql.cj.protocol.Resultset;
 import conexion.Conectar;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import sisge.Alumno;
 import sisge.Curso;
@@ -36,7 +40,7 @@ import sisge.llenarCombos;
  * @author Jared
  */
 public class FrmReport extends javax.swing.JInternalFrame {
-
+                String ruta;
     Conectar condb = new Conectar();
     Connection conn = condb.conexion();
 //    PreparedStatement pst;
@@ -68,6 +72,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
         btn_generar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -76,27 +81,27 @@ public class FrmReport extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("GENERAR REPORTE DE CALIFICACIONES");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
 
         jComboBoxGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxGrupoActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 150, 30));
+        jPanel1.add(jComboBoxGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 150, 30));
 
         jComboBoxTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxTurnoActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBoxTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 140, 30));
+        jPanel1.add(jComboBoxTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 140, 30));
 
-        jPanel1.add(jComboBoxMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 180, 30));
+        jPanel1.add(jComboBoxMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 180, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText(" Turno");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, -1, -1));
 
         btn_generar.setBackground(new java.awt.Color(90, 166, 255));
         btn_generar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -110,25 +115,39 @@ public class FrmReport extends javax.swing.JInternalFrame {
                 btn_generarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 100, 30));
+        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 100, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Grupo");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Materia");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(90, 166, 255));
+        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Abrir");
+        jButton1.setBorderPainted(false);
+        jButton1.setDefaultCapable(false);
+        jButton1.setFocusPainted(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -147,18 +166,36 @@ public class FrmReport extends javax.swing.JInternalFrame {
         GenReport();
 //        System.out.println(idCurso + " - " + idGrupo + " - " + turno);
     }//GEN-LAST:event_btn_generarActionPerformed
-    public static final String LOGO = "C:\\Users\\Jared\\Desktop\\SISGE\\SISGE\\src\\assets\\logo.png";
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+
+                
+        JFileChooser file = new JFileChooser();
+        int selected = file.showSaveDialog(jPanel1);
+        if ( selected == JFileChooser.APPROVE_OPTION) {
+            File files  = file.getSelectedFile();
+            ruta = files.toString();
+          
+            
+//             OpenText(ruta);
+            abrirarchivo(ruta);
+             
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+//    public static final String LOGO = "C:\\Users\\Jared\\Desktop\\SISGE\\SISGE\\src\\assets\\logo.png";
 
     private void GenReport() {
 
         String idCurso = (jComboBoxMateria.getItemAt(jComboBoxMateria.getSelectedIndex()).getId());
         String idGrupo = Integer.toString(jComboBoxGrupo.getItemAt(jComboBoxGrupo.getSelectedIndex()).getId());
+        String NGrupo = (jComboBoxGrupo.getItemAt(jComboBoxGrupo.getSelectedIndex()).getGrupo());
         String turno = jComboBoxTurno.getItemAt(jComboBoxTurno.getSelectedIndex()).getId();
         Document documento = new Document(PageSize.A4.rotate());
         try {
             String ruta = System.getProperty("user.home");
 
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/Reportecalificacion/Reporte_Calificacion.pdf")).setInitialLeading(20);
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE-/SISGE/Reportes/Reportecalificacion/Reporte_Calificacion_"+ NGrupo+".pdf")).setInitialLeading(20);
             documento.open();
             documento.add(new Chunk(""));
 
@@ -193,7 +230,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
 
                     } while (rs.next());
 
-                    Image foto = Image.getInstance(LOGO);
+                    Image foto = Image.getInstance(ruta + "/Desktop/SISGE-/SISGE/src/assets/logo.png");
                     foto.scaleToFit(85, 85);
                     foto.setAlignment(Chunk.ALIGN_LEFT);
                     documento.add(foto);
@@ -245,6 +282,21 @@ public class FrmReport extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
+    
+   public void abrirarchivo(String archivo){
+
+     try {
+
+            File objetofile = new File (archivo);
+            Desktop.getDesktop().open(objetofile);
+
+     }catch (IOException ex) {
+
+            System.out.println(ex);
+
+     }
+
+}        
 
     public void llenarCombox() {
         Conectar.conexion();
@@ -272,6 +324,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_generar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<Grupo> jComboBoxGrupo;
     private javax.swing.JComboBox<Curso> jComboBoxMateria;
     private javax.swing.JComboBox<items> jComboBoxTurno;

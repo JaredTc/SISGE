@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-=======
-            <file>file:/C:/Users/gmgv_/OneDrive/Desktop/SISGE/SISGE/src/Interfaces/FrmLogin.java</file>
-            <file>file:/C:/Users/gmgv_/OneDrive/Desktop/SISGE/SISGE/src/Interfaces/MenuControlEscolar.java</file>
-            <file>file:/C:/Users/gmgv_/OneDrive/Desktop/SISGE/SISGE/src/Interfaces/RegistroEncargados.java</file>
->>>>>>> 442e93a099642f2198f8ee38ed91a0fdd34939c9
-            <file>file:/C:/Users/gmgv_/OneDrive/Desktop/SISGE/SISGE/src/Interfaces/MenuAdministrador.java</file>
+            <file>file:/C:/Users/Jared/Desktop/SISGE-/SISGE/src/Interfaces/FrmListaReport.java</file>
+            <file>file:/C:/Users/Jared/Desktop/SISGE-/SISGE/src/Interfaces/FrmReport.java</file>
+            <file>file:/C:/Users/Jared/Desktop/SISGE-/SISGE/src/sisge/llenarCombos.java</file>
+            <file>file:/C:/Users/Jared/Desktop/SISGE-/SISGE/src/Interfaces/FrmControReportes.java</file>
+            <file>file:/C:/Users/Jared/Desktop/SISGE-/SISGE/src/Interfaces/FrmAltaCalificaciones.java</file>
+            <file>file:/C:/Users/Jared/Desktop/SISGE-/SISGE/src/Interfaces/FrmEstadisticas.java</file>
+            <file>file:/C:/Users/Jared/Desktop/SISGE-/SISGE/src/Interfaces/MenuControlEscolar.java</file>
+            <file>file:/C:/Users/Jared/Desktop/SISGE-/SISGE/src/sisge/Carrera.java</file>
         </group>
     </open-files>
 </project-private>

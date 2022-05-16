@@ -146,4 +146,25 @@ public class llenarCombos {
         }
       return docente;
    }
+             public ArrayList<Carrera> Carrera(){
+    ArrayList<Carrera> carrera = new ArrayList<>();
+             String Q = "SELECT id_carrera, descripcion  FROM carrera";
+        try {
+    
+            resultado = sentencia.executeQuery(Q);
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }try {
+            while (resultado.next()) {            
+               Carrera alm = new Carrera();
+                alm.setId(resultado.getString("id_carrera"));
+                alm.setDescripcion(resultado.getString("descripcion"));
+            carrera.add(alm);
+            
+        }
+        } catch (Exception e) {
+        }
+      return carrera;
+   }
 }

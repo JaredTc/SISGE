@@ -1,6 +1,6 @@
 package Interfaces;
 
-import static Interfaces.FrmReport.LOGO;
+
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -99,7 +99,7 @@ public class FrmListaReport extends javax.swing.JInternalFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 150, 160, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 300));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -136,13 +136,14 @@ public class FrmListaReport extends javax.swing.JInternalFrame {
 
         String idCurso = (jComboBoxMateria.getItemAt(jComboBoxMateria.getSelectedIndex()).getId());
         String idGrupo = Integer.toString(jComboBoxGrupo.getItemAt(jComboBoxGrupo.getSelectedIndex()).getId());
+        String NGrupo = (jComboBoxGrupo.getItemAt(jComboBoxGrupo.getSelectedIndex()).getGrupo());
         String turno = jComboBoxTurno.getItemAt(jComboBoxTurno.getSelectedIndex()).getId();
 
         Document documento = new Document();
 
         try {
             String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/ListaGrupal/ListaGrupal.pdf")).setInitialLeading(20);
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE-/SISGE/Reportes/ListaGrupal/ListaGrupal_"+NGrupo +".pdf")).setInitialLeading(20);
             documento.open();
             documento.add(new Chunk(""));
             PdfPTable tabla = new PdfPTable(4);
@@ -172,7 +173,7 @@ public class FrmListaReport extends javax.swing.JInternalFrame {
 
                     } while (rs.next());
 
-                    Image foto = Image.getInstance(LOGO);
+                    Image foto = Image.getInstance(ruta + "/Desktop/SISGE-/SISGE/src/assets/logo.png");
                     foto.scaleToFit(85, 85);
                     foto.setAlignment(Chunk.ALIGN_LEFT);
                     documento.add(foto);
