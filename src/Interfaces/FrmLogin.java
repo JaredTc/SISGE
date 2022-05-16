@@ -13,6 +13,7 @@ public class FrmLogin extends javax.swing.JFrame {
     Connection conn = condb.conexion();
     Statement st;
     ResultSet rs;
+    int miembro = 0;
 
     public FrmLogin() throws SQLException {
         initComponents();
@@ -51,6 +52,7 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -71,7 +73,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel13.setText("ESCOLAR");
-        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, -1, -1));
+        getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(90, 166, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -160,6 +162,9 @@ public class FrmLogin extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 590, 170, 50));
 
+        jLabel3.setText("jLabel3");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -172,19 +177,43 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jcb_perfilesItemStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Logueo(txt_usuario.getText(), txt_password.getText(),Integer.parseInt(lbl_id.getText()));
+        switch (jcb_perfiles.getSelectedIndex()) {
+            case 1 -> LoginAdministrador(miembro, txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
+            case 2 -> LoginAlumno(miembro, txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
+            case 3 -> LoginEncargado(miembro, txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
+            case 4 -> LoginDocentes(miembro, txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
+            default -> {
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcb_perfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_perfilesActionPerformed
-        // TODO add your handling code here:
+        switch (jcb_perfiles.getSelectedIndex()) {
+            case 1 -> {
+                miembro = Integer.parseInt(JOptionPane.showInputDialog("Ingresa id de administrador"));
+                JOptionPane.showMessageDialog(null, "Ahora ingresa tu usuario y contraseña en los campos correspondientes");
+            }
+            case 2 -> {
+                miembro = Integer.parseInt(JOptionPane.showInputDialog("Ingresa id de alumno"));
+                JOptionPane.showMessageDialog(null, "Ahora ingresa tu usuario y contraseña en los campos correspondientes");
+            }
+            case 3 -> {
+                miembro = Integer.parseInt(JOptionPane.showInputDialog("Ingresa id de encargado"));
+                JOptionPane.showMessageDialog(null, "Ahora ingresa tu usuario y contraseña en los campos correspondientes");
+            }
+            case 4 -> {
+                miembro = Integer.parseInt(JOptionPane.showInputDialog("Ingresa id de docente"));
+                JOptionPane.showMessageDialog(null, "Ahora ingresa tu usuario y contraseña en los campos correspondientes");
+            }
+            default -> {
+            }
+        }
     }//GEN-LAST:event_jcb_perfilesActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    
 
     public void MostrarRoles() throws SQLException {
         st = conn.createStatement();
@@ -214,53 +243,114 @@ public class FrmLogin extends javax.swing.JFrame {
 
     }
 
-    public void Logueo(String usuario, String password, int rol) {
-        try {
+    public void LoginAdministrador(int miembro, String usuario, String password, int rol) {
 
-            String sql = "SELECT * FROM usuarios WHERE usuario='" + usuario + "' and password='" + password + "'and id_rol ='"+rol+"'";
-    
-            
-            
+        String sql = "select ad.id_administrador as id, ad.paterno as paterno, ad.materno as materno, ad.nombre as nombre from administrador ad, usuarios u, rol r\n"
+                + "where u.id_miembro='" + miembro + "' and ad.id_administrador=u.id_miembro and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol=1 and u.id_rol=r.id and r.id=ad.id_rol;";
+        try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
-
             if (rs.next()) {
-                JOptionPane.showMessageDialog(null, "Bienvenido(a)");
-                switch (jcb_perfiles.getSelectedIndex()) {
-                    case 1 -> {
-                        MenuAdministrador admin = new MenuAdministrador();
-                        admin.setVisible(true);
-                        admin.lbl_usuario.setText(rs.getString("usuario"));                        
-                        this.dispose();
-                    }
-                    case 2 -> {
-                        MenuAlumnos alumno = new MenuAlumnos();
-                        alumno.setVisible(true);
-                        alumno.lbl_user.setText(rs.getString("usuario"));
-                            this.dispose();
-                        
-                    }
-                    case 3 -> {
-                       MenuControlEscolar encargado = new MenuControlEscolar();
-                        encargado.setVisible(true);
-                        this.dispose();
-                    }
-                    case 4 -> {
-                        MenuDocentes docente = new MenuDocentes();
-                        docente.setVisible(true);
-                        this.dispose();
-                    }
-                    default -> {
-                    }
-                }
+                JOptionPane.showMessageDialog(null, "Autentificación exitosa");
+                MenuAdministrador admin = new MenuAdministrador();
+                admin.setVisible(true);
+                admin.lbl_idadmin.setText(rs.getString("id"));
+                admin.lbl_paterno.setText(rs.getString("paterno"));
+                admin.lbl_materno.setText(rs.getString("materno"));
+                admin.lbl_nombre.setText(rs.getString("nombre"));
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
+                Limpiar();
             }
-
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error de conexion " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Surgio un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
+    }
 
+    public void LoginAlumno(int miembro, String usuario, String password, int rol) {
+
+        String sql = "select a.id_alumno as id, a.paterno as paterno, a.materno as materno, a.nombre as nombre, a.telefono as telefono from alumno a, usuarios u, rol r\n"
+                + "where u.id_miembro='" + miembro + "' and a.id_alumno=u.id_miembro and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=a.id_rol";
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Autentificación exitosa");
+                MenuAlumnos alumno = new MenuAlumnos();
+                alumno.setVisible(true);
+                alumno.lbl_idalumno.setText(rs.getString("id"));
+                alumno.lblpaterno.setText(rs.getString("paterno"));
+                alumno.lblmaterno.setText(rs.getString("materno"));
+                alumno.lblnombre.setText(rs.getString("nombre"));
+                alumno.lbltelefono.setText(rs.getString("telefono"));
+                alumno.MostrarSemestre();
+                alumno.MostrarCalificaciones();
+                alumno.MostrarPromedio();
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
+                Limpiar();
+            }
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Surgio un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void LoginEncargado(int miembro, String usuario, String password, int rol) {
+
+        String sql = "select e.id_encargado as id, e.paterno as paterno, e.materno as materno, e.nombre as nombre from encargado e, usuarios u, rol r\n"
+                + "where u.id_miembro='" + miembro + "' and e.id_encargado=u.id_miembro and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=e.id_rol";
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Autentificación exitosa");
+                MenuControlEscolar control = new MenuControlEscolar();
+                control.setVisible(true);
+                control.lbl_idencargado.setText(rs.getString("id"));
+                control.lbl_paterno.setText(rs.getString("paterno"));
+                control.lbl_materno.setText(rs.getString("materno"));
+                control.lbl_nombre.setText(rs.getString("nombre"));
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
+                Limpiar();
+            }
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Surgio un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void LoginDocentes(int miembro, String usuario, String password, int rol) {
+
+        String sql = "select d.id_docente as id, d.paterno as paterno, d.materno as materno, d.nombre as nombre from docente d, usuarios u, rol r\n"
+                + "where u.id_miembro='" + miembro + "' and d.id_docente=u.id_miembro and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=d.id_rol";
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Autentificación exitosa");
+                MenuDocentes docentes = new MenuDocentes();
+                docentes.setVisible(true);
+                docentes.lbl_iddocente.setText(rs.getString("id"));
+                docentes.lbl_paterno.setText(rs.getString("paterno"));
+                docentes.lbl_materno.setText(rs.getString("materno"));
+                docentes.lbl_nombre.setText(rs.getString("nombre"));
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
+                Limpiar();
+            }
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, "Surgio un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void Limpiar(){
+        jcb_perfiles.setSelectedIndex(0);
+        txt_password.setText("");
+        txt_usuario.setText("");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -275,6 +365,7 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
