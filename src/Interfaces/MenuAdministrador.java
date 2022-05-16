@@ -42,8 +42,15 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        lbl_usuario = new javax.swing.JLabel();
+        lbl_paterno = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lbl_materno = new javax.swing.JLabel();
+        lbl_nombre = new javax.swing.JLabel();
+        lbl_idadmin = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
 
@@ -54,11 +61,11 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel6.setText("ADMINISTRADOR");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 230, -1));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, 170, -1));
 
-        jButton9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton9.setText("Crear nuevo usuario");
         jButton9.setBorder(null);
         jButton9.setContentAreaFilled(false);
@@ -68,7 +75,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 190, -1));
+        jPanel6.add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 190, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/logo.png"))); // NOI18N
         jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
@@ -87,7 +94,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
         jPanel6.add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 610, 190, 40));
 
-        jButton11.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton11.setText("Gestion de usuarios");
         jButton11.setBorder(null);
         jButton11.setBorderPainted(false);
@@ -99,9 +106,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 180, -1));
+        jPanel6.add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 180, -1));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setText("Crear Administrador");
         jButton3.setBorder(null);
         jButton3.setBorderPainted(false);
@@ -112,9 +119,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
+        jPanel6.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton5.setText("Crear nuevo encargado");
         jButton5.setBorder(null);
         jButton5.setBorderPainted(false);
@@ -125,19 +132,32 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        jPanel6.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        jPanel6.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, -1, -1));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("USUARIO: ");
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
-
-        lbl_usuario.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jPanel6.add(lbl_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 160, 50));
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
+        jPanel6.add(lbl_paterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 120, 20));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/girl and boy sitting with laptop.png"))); // NOI18N
-        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 150, -1));
+        jPanel6.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 150, 220));
+        jPanel6.add(lbl_materno, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 130, 20));
+        jPanel6.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 120, 20));
+        jPanel6.add(lbl_idadmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 40, 20));
 
-        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 668));
+        jLabel3.setText("Apellido Paterno:");
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
+
+        jLabel4.setText("Apellido Materno:");
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
+
+        jLabel5.setText("Nombre:");
+        jPanel6.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
+
+        jLabel9.setText("ID Administrador:");
+        jPanel6.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, -1, -1));
+
+        getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 668));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/MacBook Pro 14_ - Inicio Sesion.png"))); // NOI18N
 
@@ -209,7 +229,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar el registro?", "CONFIRMACION", 0);
+       int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de cerrar tu sesion?", "CONFIRMACION", 0);
         if (s == 0) {
             this.dispose();
             JOptionPane.showMessageDialog(null, "!!HASTA PRONTO!!");
@@ -268,10 +288,17 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel6;
-    public javax.swing.JLabel lbl_usuario;
+    public javax.swing.JLabel lbl_idadmin;
+    public javax.swing.JLabel lbl_materno;
+    public javax.swing.JLabel lbl_nombre;
+    public javax.swing.JLabel lbl_paterno;
     // End of variables declaration//GEN-END:variables
 }

@@ -110,7 +110,7 @@ public class MenuControlEscolar extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 190, 40));
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 680, 190, 40));
 
         jButton4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton4.setText("Registro de Docentes");
@@ -226,8 +226,10 @@ public class MenuControlEscolar extends javax.swing.JFrame {
             reinscripcion = new frmReinscripcion();
             jDesktopPane1.add(reinscripcion);
             reinscripcion.show();
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -242,7 +244,7 @@ public class MenuControlEscolar extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlEscolar.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -319,5 +321,9 @@ public class MenuControlEscolar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel3;
+    public javax.swing.JLabel lbl_idencargado;
+    public javax.swing.JLabel lbl_materno;
+    public javax.swing.JLabel lbl_nombre;
+    public javax.swing.JLabel lbl_paterno;
     // End of variables declaration//GEN-END:variables
 }
