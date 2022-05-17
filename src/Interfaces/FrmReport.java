@@ -159,7 +159,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
         try {
             String ruta = System.getProperty("user.home");
 
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/Reportecalificacion/Reporte_Calificacion_"+ Grupo+".pdf")).setInitialLeading(20);
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/SISGE/SISGE/Reportes/Reportecalificacion/Reporte_Calificacion_"+ Grupo+".pdf")).setInitialLeading(20);
             documento.open();
             documento.add(new Chunk(""));
 
