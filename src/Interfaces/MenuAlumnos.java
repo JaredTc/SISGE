@@ -155,7 +155,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel14.setText("PROMEDIO GLOBAL");
+        jLabel14.setText("Promedio Global");
         jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         lbl_promedio.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
