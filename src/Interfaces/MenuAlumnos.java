@@ -63,17 +63,19 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_calificacion = new javax.swing.JTable();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         lbl_promedio = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         lbltelefono = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -84,7 +86,6 @@ public class MenuAlumnos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        lbl_user = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lbl_idalumno = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -94,6 +95,8 @@ public class MenuAlumnos extends javax.swing.JFrame {
         lbl_turno = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         lbl_grupo = new javax.swing.JLabel();
+        lbl_user = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -104,10 +107,6 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel9.setText("CALIFICACIONES");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         tbl_calificacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -122,80 +121,86 @@ public class MenuAlumnos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tbl_calificacion);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 710, 180));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 500, 140));
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel15.setText("CALIFICACIONES");
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 570, 290));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel14.setText("PROMEDIO GLOBAL");
-        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, -1, -1));
-        jPanel3.add(lbl_promedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 80, 40));
+        jPanel4.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 840, 330));
+        lbl_promedio.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lbl_promedio.setText(".");
+        jPanel4.add(lbl_promedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 170, 40));
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "HISTORIAL ACADÉMICO", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 18))); // NOI18N
-        jPanel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 20, 230, 180));
 
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel9.setText(" ACADEMICO");
+        jPanel5.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(90, 166, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("GENERAR KARDEX");
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Generar ");
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setDefaultCapable(false);
+        jButton1.setFocusPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 130, 30));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(341, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(311, 311, 311))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jButton1)
-                .addContainerGap(109, Short.MAX_VALUE))
-        );
+        jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel16.setText("HISTORIAL ");
+        jPanel5.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
-        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 840, 220));
+        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, 370, 150));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/MacBook Pro 14_ - Inicio Sesion.png"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 910, 670));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 910, 670));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 910, 640));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 910, 670));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/logo.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel3.setText("ESTUDIANTE");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         lbltelefono.setText(" ");
-        jPanel1.add(lbltelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 110, -1));
+        jPanel1.add(lbltelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 110, -1));
 
         jLabel6.setText("Apellido Paterno:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
 
         jLabel7.setText("Apellido Materno:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         jLabel8.setText("Telefono:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
         lblnombre.setText(" ");
-        jPanel1.add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 110, -1));
+        jPanel1.add(lblnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 110, -1));
 
         lblpaterno.setText(" ");
-        jPanel1.add(lblpaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 110, -1));
+        jPanel1.add(lblpaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 110, -1));
 
         lblmaterno.setText(" ");
-        jPanel1.add(lblmaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 110, -1));
+        jPanel1.add(lblmaterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 110, -1));
 
         jButton3.setBackground(new java.awt.Color(90, 166, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -209,31 +214,35 @@ public class MenuAlumnos extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 630, 200, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 620, 200, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/girl taking notes.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, -1, 200));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, 200));
 
         jLabel10.setText("Nombre:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
-        jPanel1.add(lbl_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 130, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLabel5.setText("ID alumno:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-        jPanel1.add(lbl_idalumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 100, 20));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        jPanel1.add(lbl_idalumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 100, 20));
 
         jLabel11.setText("Semestre:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
-        jPanel1.add(lbl_idsemestre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, 30, 20));
-        jPanel1.add(lbl_semestre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 120, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        jPanel1.add(lbl_idsemestre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, 30, 20));
+        jPanel1.add(lbl_semestre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 120, 20));
 
         jLabel12.setText("Turno");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, -1, -1));
-        jPanel1.add(lbl_turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 120, 20));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+        jPanel1.add(lbl_turno, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 120, 20));
 
         jLabel13.setText("Gupo:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
-        jPanel1.add(lbl_grupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 120, 20));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
+        jPanel1.add(lbl_grupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 120, 20));
+        jPanel1.add(lbl_user, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 130, 20));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setText("ESTUDIANTE");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 670));
 
@@ -261,7 +270,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
         try {
             String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(kardex, new FileOutputStream(ruta + "/OneDrive/Desktop/SISGE/SISGE/Reportes/ReporteHistorial/Kardex.pdf")).setInitialLeading(20);
+            PdfWriter.getInstance(kardex, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/ReporteHistorial/Kardex.pdf")).setInitialLeading(20);
             kardex.open();
 
             PdfPTable tabla = new PdfPTable(3);
@@ -270,10 +279,10 @@ public class MenuAlumnos extends javax.swing.JFrame {
             tabla.addCell("Calificacion");
             try {
                 String sql = "select c.semestre as semestre, c.nombre as curso, ifnull(tm.calificacion,'') as calificacion\n"
-                        + "from curso c\n"
-                        + "left outer join toma tm on c.id_curso=tm.id_curso\n"
-                        + "and id_alumno='"+Integer.parseInt(lbl_idalumno.getText())+"'\n"
-                        + "order by semestre,curso ASC";
+                + "from curso c\n"
+                + "left outer join toma tm on c.id_curso=tm.id_curso\n"
+                + "and id_alumno='"+Integer.parseInt(lbl_idalumno.getText())+"'\n"
+                + "order by semestre,curso ASC";
                 st = conn.createStatement();
                 rs = st.executeQuery(sql);
                 if (rs.next()) {
@@ -294,7 +303,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
                     try {
                         String query = "SELECT paterno, materno, nombre from alumno where id_alumno='"
-                                + Integer.parseInt(lbl_idalumno.getText()) + "'";
+                        + Integer.parseInt(lbl_idalumno.getText()) + "'";
                         st = conn.createStatement();
                         rs = st.executeQuery(query);
 
@@ -318,7 +327,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
                     try {
                         String query = "select c.descripcion as carrera from carrera c, inscripcion i, alumno a "
-                                + "where i.carrera=c.id_carrera and a.id_alumno=i.id_alumno and i.id_alumno='" + Integer.parseInt(lbl_idalumno.getText()) + "'";
+                        + "where i.carrera=c.id_carrera and a.id_alumno=i.id_alumno and i.id_alumno='" + Integer.parseInt(lbl_idalumno.getText()) + "'";
                         st = conn.createStatement();
                         rs = st.executeQuery(query);
 
@@ -342,15 +351,15 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
                     try {
                         String query = "SELECT avg (tm.calificacion) as promedio\n"
-                                + "FROM toma tm, curso c, alumno al, grupos gp, turno trn , semestre sm, docente d\n"
-                                + "WHERE tm.id_curso = c.id_curso\n"
-                                + "AND tm.id_alumno = al.id_alumno\n"
-                                + "AND tm.id_grupo = gp.id_grupo\n"
-                                + "AND tm.id_turno = trn.id_turno\n"
-                                + "AND tm.id_semestre = sm.id_semestre\n"
-                                + "AND tm.id_docente = d.id_docente\n"
-                                + "and al.id_alumno='" + Integer.parseInt(lbl_idalumno.getText()) + "'\n"
-                                + "ORDER BY id_toma ASC";
+                        + "FROM toma tm, curso c, alumno al, grupos gp, turno trn , semestre sm, docente d\n"
+                        + "WHERE tm.id_curso = c.id_curso\n"
+                        + "AND tm.id_alumno = al.id_alumno\n"
+                        + "AND tm.id_grupo = gp.id_grupo\n"
+                        + "AND tm.id_turno = trn.id_turno\n"
+                        + "AND tm.id_semestre = sm.id_semestre\n"
+                        + "AND tm.id_docente = d.id_docente\n"
+                        + "and al.id_alumno='" + Integer.parseInt(lbl_idalumno.getText()) + "'\n"
+                        + "ORDER BY id_toma ASC";
                         st = conn.createStatement();
                         rs = st.executeQuery(query);
 
@@ -381,7 +390,6 @@ public class MenuAlumnos extends javax.swing.JFrame {
         } catch (DocumentException | FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Error al generar" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -504,6 +512,8 @@ public class MenuAlumnos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -516,6 +526,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_grupo;
     public javax.swing.JLabel lbl_idalumno;
