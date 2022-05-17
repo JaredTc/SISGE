@@ -264,7 +264,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
         try {
             String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(kardex, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/ReporteHistorial/Kardex.pdf")).setInitialLeading(20);
+            PdfWriter.getInstance(kardex, new FileOutputStream(ruta + "/OneDrive/Desktop/SISGE/SISGE/Reportes/ReporteHistorial/Kardex.pdf")).setInitialLeading(20);
             kardex.open();
 
             PdfPTable tabla = new PdfPTable(3);

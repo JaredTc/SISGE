@@ -178,17 +178,17 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         switch (jcb_perfiles.getSelectedIndex()) {
-            case 1 -> LoginAdministrador(miembro, txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
-            case 2 -> LoginAlumno(miembro, txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
-            case 3 -> LoginEncargado(miembro, txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
-            case 4 -> LoginDocentes(miembro, txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
+            case 1 -> LoginAdministrador(txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
+            case 2 -> LoginAlumno(txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
+            case 3 -> LoginEncargado(txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
+            case 4 -> LoginDocentes(txt_usuario.getText(), txt_password.getText(), Integer.parseInt(lbl_id.getText()));
             default -> {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcb_perfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcb_perfilesActionPerformed
-        switch (jcb_perfiles.getSelectedIndex()) {
+        /*switch (jcb_perfiles.getSelectedIndex()) {
             case 1 -> {
                 miembro = Integer.parseInt(JOptionPane.showInputDialog("Ingresa id de administrador"));
                 JOptionPane.showMessageDialog(null, "Ahora ingresa tu usuario y contraseña en los campos correspondientes");
@@ -207,7 +207,7 @@ public class FrmLogin extends javax.swing.JFrame {
             }
             default -> {
             }
-        }
+        }*/
     }//GEN-LAST:event_jcb_perfilesActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -243,10 +243,10 @@ public class FrmLogin extends javax.swing.JFrame {
 
     }
 
-    public void LoginAdministrador(int miembro, String usuario, String password, int rol) {
+    public void LoginAdministrador(String usuario, String password, int rol) {
 
         String sql = "select ad.id_administrador as id, ad.paterno as paterno, ad.materno as materno, ad.nombre as nombre from administrador ad, usuarios u, rol r\n"
-                + "where u.id_miembro='" + miembro + "' and ad.id_administrador=u.id_miembro and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol=1 and u.id_rol=r.id and r.id=ad.id_rol;";
+                + "WHERE u.id_miembro=ad.id_administrador and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol=1 and u.id_rol=r.id and r.id=ad.id_rol";
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
@@ -268,10 +268,10 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }
 
-    public void LoginAlumno(int miembro, String usuario, String password, int rol) {
+    public void LoginAlumno(String usuario, String password, int rol) {
 
         String sql = "select a.id_alumno as id, a.paterno as paterno, a.materno as materno, a.nombre as nombre, a.telefono as telefono from alumno a, usuarios u, rol r\n"
-                + "where u.id_miembro='" + miembro + "' and a.id_alumno=u.id_miembro and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=a.id_rol";
+                + "where u.id_miembro=a.id_alumno and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=a.id_rol";
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
@@ -297,10 +297,10 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }
 
-    public void LoginEncargado(int miembro, String usuario, String password, int rol) {
+    public void LoginEncargado(String usuario, String password, int rol) {
 
         String sql = "select e.id_encargado as id, e.paterno as paterno, e.materno as materno, e.nombre as nombre from encargado e, usuarios u, rol r\n"
-                + "where u.id_miembro='" + miembro + "' and e.id_encargado=u.id_miembro and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=e.id_rol";
+                + "where u.id_miembro=e.id_encargado and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=e.id_rol";
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);
@@ -322,10 +322,10 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }
 
-    public void LoginDocentes(int miembro, String usuario, String password, int rol) {
+    public void LoginDocentes(String usuario, String password, int rol) {
 
         String sql = "select d.id_docente as id, d.paterno as paterno, d.materno as materno, d.nombre as nombre from docente d, usuarios u, rol r\n"
-                + "where u.id_miembro='" + miembro + "' and d.id_docente=u.id_miembro and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=d.id_rol";
+                + "where u.id_miembro=d.id_docente and u.usuario='" + usuario + "' and u.password='" + password + "' and u.id_rol='" + rol + "' and u.id_rol=r.id and r.id=d.id_rol";
         try {
             st = conn.createStatement();
             rs = st.executeQuery(sql);

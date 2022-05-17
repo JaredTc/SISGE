@@ -143,7 +143,7 @@ public class FrmListaReport extends javax.swing.JInternalFrame {
 
         try {
             String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/ListaGrupal/ListaGrupal_"+Grupo+".pdf")).setInitialLeading(20);
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/SISGE/SISGE/Reportes/ListaGrupal/ListaGrupal_"+Grupo+".pdf")).setInitialLeading(20);
             documento.open();
             documento.add(new Chunk(""));
             PdfPTable tabla = new PdfPTable(4);

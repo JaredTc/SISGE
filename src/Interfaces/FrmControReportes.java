@@ -169,7 +169,7 @@ public class FrmControReportes extends javax.swing.JInternalFrame {
         try {
             String ruta = System.getProperty("user.home");
 
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/Constancias/Constancia_" + Alumno + ".pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/SISGE/SISGE/Reportes/Constancias/Constancia_" + Alumno + ".pdf"));
 
             documento.open();
             documento.add(new Chunk(""));
