@@ -254,10 +254,10 @@ public class FrmLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Autentificación exitosa");
                 MenuAdministrador admin = new MenuAdministrador();
                 admin.setVisible(true);
-                admin.lbl_idadmin.setText(rs.getString("id"));
-                admin.lbl_paterno.setText(rs.getString("paterno"));
-                admin.lbl_materno.setText(rs.getString("materno"));
-                admin.lbl_nombre.setText(rs.getString("nombre"));
+//                admin.lbl_idadmin.setText(rs.getString("id"));
+//                admin.lbl_paterno.setText(rs.getString("paterno"));
+//                admin.lbl_materno.setText(rs.getString("materno"));
+//                admin.lbl_nombre.setText(rs.getString("nombre"));
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
@@ -308,10 +308,10 @@ public class FrmLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Autentificación exitosa");
                 MenuControlEscolar control = new MenuControlEscolar();
                 control.setVisible(true);
-                control.lbl_idencargado.setText(rs.getString("id"));
-                control.lbl_paterno.setText(rs.getString("paterno"));
-                control.lbl_materno.setText(rs.getString("materno"));
-                control.lbl_nombre.setText(rs.getString("nombre"));
+//                control.lbl_idencargado.setText(rs.getString("id"));
+//                control.lbl_paterno.setText(rs.getString("paterno"));
+//                control.lbl_materno.setText(rs.getString("materno"));
+//                control.lbl_nombre.setText(rs.getString("nombre"));
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);
@@ -333,10 +333,10 @@ public class FrmLogin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Autentificación exitosa");
                 MenuDocentes docentes = new MenuDocentes();
                 docentes.setVisible(true);
-                docentes.lbl_iddocente.setText(rs.getString("id"));
-                docentes.lbl_paterno.setText(rs.getString("paterno"));
-                docentes.lbl_materno.setText(rs.getString("materno"));
-                docentes.lbl_nombre.setText(rs.getString("nombre"));
+//                docentes.lbl_iddocente.setText(rs.getString("id"));
+//                docentes.lbl_paterno.setText(rs.getString("paterno"));
+//                docentes.lbl_materno.setText(rs.getString("materno"));
+//                docentes.lbl_nombre.setText(rs.getString("nombre"));
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Credenciales incorrectas", "Datos Incorrectos", JOptionPane.ERROR_MESSAGE);

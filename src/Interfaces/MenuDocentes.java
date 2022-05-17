@@ -39,15 +39,6 @@ public class MenuDocentes extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         reporte = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        lbl_iddocente = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        lbl_paterno = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        lbl_materno = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        lbl_nombre = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
@@ -77,7 +68,7 @@ public class MenuDocentes extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 390, -1, -1));
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
 
         jButton3.setBackground(new java.awt.Color(90, 166, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -91,7 +82,7 @@ public class MenuDocentes extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 660, 200, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 200, -1));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton2.setText("Alta de Calificaciones");
@@ -104,7 +95,7 @@ public class MenuDocentes extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, -1, -1));
 
         reporte.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         reporte.setText("Reporte Calificaciones");
@@ -117,32 +108,12 @@ public class MenuDocentes extends javax.swing.JFrame {
                 reporteActionPerformed(evt);
             }
         });
-        jPanel1.add(reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
+        jPanel1.add(reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/girl and boy sitting with laptop.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 160, 220));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 160, 220));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("USUARIO");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 130, -1, -1));
-
-        jLabel9.setText("ID Docente:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, -1, -1));
-        jPanel1.add(lbl_iddocente, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 40, 20));
-
-        jLabel6.setText("Apellido Paterno:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
-        jPanel1.add(lbl_paterno, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 120, 20));
-
-        jLabel7.setText("Apellido Materno:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, -1, -1));
-        jPanel1.add(lbl_materno, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 130, 20));
-
-        jLabel8.setText("Nombre:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, -1, -1));
-        jPanel1.add(lbl_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 260, 120, 20));
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 700));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 640));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -161,8 +132,8 @@ public class MenuDocentes extends javax.swing.JFrame {
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -262,17 +233,8 @@ public class MenuDocentes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    public javax.swing.JLabel lbl_iddocente;
-    public javax.swing.JLabel lbl_materno;
-    public javax.swing.JLabel lbl_nombre;
-    public javax.swing.JLabel lbl_paterno;
     private javax.swing.JButton reporte;
     // End of variables declaration//GEN-END:variables
 }

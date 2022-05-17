@@ -110,7 +110,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
                 btn_generarActionPerformed(evt);
             }
         });
-        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 110, 100, 30));
+        jPanel1.add(btn_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 170, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Grupo");
@@ -124,11 +124,11 @@ public class FrmReport extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -147,18 +147,19 @@ public class FrmReport extends javax.swing.JInternalFrame {
         GenReport();
 //        System.out.println(idCurso + " - " + idGrupo + " - " + turno);
     }//GEN-LAST:event_btn_generarActionPerformed
-    public static final String LOGO = "C:\\Users\\Jared\\Desktop\\SISGE\\SISGE\\src\\assets\\logo.png";
+
 
     private void GenReport() {
 
         String idCurso = (jComboBoxMateria.getItemAt(jComboBoxMateria.getSelectedIndex()).getId());
         String idGrupo = Integer.toString(jComboBoxGrupo.getItemAt(jComboBoxGrupo.getSelectedIndex()).getId());
+                      String Grupo = (jComboBoxGrupo.getItemAt(jComboBoxGrupo.getSelectedIndex()).getGrupo());
         String turno = jComboBoxTurno.getItemAt(jComboBoxTurno.getSelectedIndex()).getId();
         Document documento = new Document(PageSize.A4.rotate());
         try {
             String ruta = System.getProperty("user.home");
 
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/Reportecalificacion/Reporte_Calificacion.pdf")).setInitialLeading(20);
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/SISGE/SISGE/Reportes/Reportecalificacion/Reporte_Calificacion_"+ Grupo+".pdf")).setInitialLeading(20);
             documento.open();
             documento.add(new Chunk(""));
 
@@ -193,8 +194,8 @@ public class FrmReport extends javax.swing.JInternalFrame {
 
                     } while (rs.next());
 
-                    Image foto = Image.getInstance(LOGO);
-                    foto.scaleToFit(85, 85);
+                    Image foto = Image.getInstance(ruta + "/Desktop/SISGE/SISGE/src/assets/UTC.png");
+                    foto.scaleToFit(50, 50);
                     foto.setAlignment(Chunk.ALIGN_LEFT);
                     documento.add(foto);
 
