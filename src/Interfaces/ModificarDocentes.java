@@ -155,16 +155,16 @@ public class ModificarDocentes extends javax.swing.JFrame {
         try {
             pst = conn.prepareStatement("UPDATE docente SET paterno='" + paterno
                     + "',materno='" + materno + "',nombre='" + nombre + "',telefono='" + telefono + "',correo='" + correo + "' WHERE id_docente='" + id + "'");
-            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACION", 0);
+            int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS CORRECTAMENTE");               
+                JOptionPane.showMessageDialog(null, "Datos modificados correctamente");               
                 this.dispose();
 //                pandoc.setVisible(true);
 //                pandoc.MostrarRegistros("");
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "Error inesperado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

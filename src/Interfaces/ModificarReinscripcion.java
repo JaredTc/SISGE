@@ -337,9 +337,9 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
                     .addComponent(jcb_grupos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_idgrupo))
                 .addGap(30, 30, 30)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(lbl_semestre, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_semestre, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -554,14 +554,14 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
         try {
             pst = conn.prepareStatement("UPDATE reinscripcion SET id_alumno='" + id_alumno
                     + "',grupo='" + id_grupo + "',turno='" + id_turno + "',carrera='" + id_carrera + "' WHERE id_reinscripcion='" + id_reinscripcion + "'");
-            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACION", 0);
+            int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Modificacion exitosa, para ver los cambios, recargue el formulario");
+                JOptionPane.showMessageDialog(null, "Modificación exitosa, para ver los cambios, recargue el formulario");
                 this.dispose();
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "Error inesperado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -585,7 +585,7 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
                 lbl_datesemestre.setText(rs.getString("semestre"));
             }
         } catch (NumberFormatException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se cargaron los datos " + e, "Error inesperado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No se cargaron los datos " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

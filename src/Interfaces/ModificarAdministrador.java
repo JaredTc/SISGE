@@ -205,16 +205,16 @@ public class ModificarAdministrador extends javax.swing.JFrame {
         try {
             pst = conn.prepareStatement("UPDATE administrador SET nombre='" + nombre +"',paterno='" + paterno
                     + "',materno='" + materno + "' WHERE id_administrador='" + id + "'");
-            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACION", 0);
+            int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el registro?", "CONFIRMACION", 0);
             if (s == 0) {
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS CORRECTAMENTE"); 
+                JOptionPane.showMessageDialog(null, "Datos actulizados exitosamente"); 
                 regad.MostrarRegistros("");
                 regad.setVisible(true);                
                 this.dispose();                
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "Error inesperado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

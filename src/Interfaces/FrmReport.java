@@ -242,7 +242,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
             }
 
             documento.close();
-            JOptionPane.showMessageDialog(null, "Reporte Creado con Exito en el escritorio");
+            JOptionPane.showMessageDialog(null, "Reporte creado con éxito en el escritorio");
         } catch (Exception e) {
         }
     }

@@ -153,10 +153,10 @@ public class MenuDocentes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de cerrar tu sesion?", "CONFIRMACION", 0);
+    int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de cerrar tu sesión?", "CONFIRMACION", 0);
         if (s == 0) {
             this.dispose();
-            JOptionPane.showMessageDialog(null, "!!HASTA PRONTO!!");
+            JOptionPane.showMessageDialog(null, "!!Hasta Pronto!!");
             FrmLogin login;
             try {
                 login = new FrmLogin();
