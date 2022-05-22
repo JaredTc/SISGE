@@ -179,10 +179,10 @@ public class ModificarCalificacion extends javax.swing.JFrame {
                 String id = txtid.getText();
         try {
              PreparedStatement pst = conn.prepareStatement("UPDATE toma SET calificacion='" + calificacion + "'WHERE id_calificacion='"+ id + "'");
-                         int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACION", 0);
+                         int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el registro?", "CONFIRMACIÓN", 0);
                          if (s == 0) {
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS CORRECTAMENTE"); 
+                JOptionPane.showMessageDialog(null, "Datos modificados correctamente"); 
                 panel.mostrardatos();
                 panel.setVisible(true);                
                 this.dispose();                

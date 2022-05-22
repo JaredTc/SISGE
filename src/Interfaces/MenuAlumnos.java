@@ -244,10 +244,10 @@ public class MenuAlumnos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de cerrar tu sesion?", "CONFIRMACION", 0);
+        int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de cerrar tu sesión?", "Confirmación", 0);
         if (s == 0) {
             this.dispose();
-            JOptionPane.showMessageDialog(null, "!!HASTA PRONTO!!");
+            JOptionPane.showMessageDialog(null, "!!Hasta pronto!!");
             FrmLogin login;
             try {
                 login = new FrmLogin();
@@ -261,10 +261,10 @@ public class MenuAlumnos extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Document kardex = new Document(PageSize.A4.rotate());
-
+        String d=lblnombre.getText()+lblpaterno.getText()+lblmaterno.getText();
         try {
             String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(kardex, new FileOutputStream(ruta + "/OneDrive/Desktop/SISGE/SISGE/Reportes/ReporteHistorial/Kardex.pdf")).setInitialLeading(20);
+            PdfWriter.getInstance(kardex, new FileOutputStream(ruta + "/OneDrive/Desktop/SISGE/SISGE/Reportes/ReporteHistorial/Kardex"+d+".pdf")).setInitialLeading(20);
             kardex.open();
 
             PdfPTable tabla = new PdfPTable(3);
@@ -453,7 +453,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
             }
             tbl_calificacion.setModel(details);
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL MOSTRAR DATOS" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al mostrar datos" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -471,7 +471,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
                 lbl_grupo.setText(rs.getString("grupo"));
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL MOSTRAR DATOS" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al mostrar datos" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -493,7 +493,7 @@ public class MenuAlumnos extends javax.swing.JFrame {
                 lbl_promedio.setText(rs.getString("promedio"));
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "ERROR AL MOSTRAR DATOS" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al mostrar datos" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -590,7 +590,7 @@ public class frmReinscripcion extends javax.swing.JInternalFrame {
                 Limpiar();
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Surgio un error " + e.getMessage(), "ERROR DE REGISTRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Surgió un error " + e.getMessage(), "ERROR DE REGISTRO", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -678,7 +678,7 @@ public class frmReinscripcion extends javax.swing.JInternalFrame {
         //Object id = btne;
         try {
             pst = conn.prepareStatement("DELETE FROM reinscripcion WHERE id_reinscripcion='" + id + "'");
-            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar el registro?", "CONFIRMACION", 0);
+            int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
                 MostrarRegistros("");

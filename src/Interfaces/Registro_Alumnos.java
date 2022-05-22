@@ -250,12 +250,12 @@ public class Registro_Alumnos extends javax.swing.JInternalFrame {
                 if (rs.next()) {
                     id_alumno = rs.getString(String.valueOf("id"));
                 }
-                JOptionPane.showMessageDialog(null, "Registro Guardado correctamente, ID asignado " + id_alumno);
+                JOptionPane.showMessageDialog(null, "Registro guardado correctamente, ID asignado " + id_alumno);
                 Limpiar();
                 MostrarRegistros("");
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Surgio un error " + e, "ERROR DE REGISTRO", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Surgió un error " + e, "ERROR DE REGISTRO", JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -335,7 +335,7 @@ public class Registro_Alumnos extends javax.swing.JInternalFrame {
         //Object id = btne;
         try {
             pst = conn.prepareStatement("DELETE FROM alumno WHERE id_alumno='" + id + "'");
-            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar el registro?", "CONFIRMACION", 0);
+            int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
                 MostrarRegistros("");

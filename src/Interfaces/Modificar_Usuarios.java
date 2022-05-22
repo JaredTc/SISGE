@@ -250,7 +250,7 @@ public class Modificar_Usuarios extends javax.swing.JInternalFrame {
        if(txt_password2.getText().equals(txt_password.getText())){
            Modificar(txt_usuario.getText(), txt_password2.getText(), Integer.parseInt(lbl_idrol.getText()));
        }else{
-           JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden ","Error de datos",JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden ","ERROR",JOptionPane.ERROR_MESSAGE);
        }         
     }//GEN-LAST:event_btn_crearActionPerformed
 
@@ -344,14 +344,14 @@ public class Modificar_Usuarios extends javax.swing.JInternalFrame {
         PreparedStatement pst = null;
         try {
             pst = conn.prepareStatement("UPDATE usuarios SET usuario='" + user + "',password='" + passwd + "',id_rol='" + rol + "' WHERE id_usuario='" + id + "'");
-            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACION", 0);
+            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "DATOS ACTUALIZADOS CORRECTAMENTE");                             
+                JOptionPane.showMessageDialog(null, "Datos modificados correctamente");                             
                 Limpiar();
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "Error inesperado", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }    
     }
     
@@ -359,7 +359,7 @@ public class Modificar_Usuarios extends javax.swing.JInternalFrame {
         String sql = "DELETE FROM usuarios WHERE id_usuario = '"+id+"'";
         try {
             pst= conn.prepareStatement(sql);
-            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de eliminar el registro?", "CONFIRMACION", 0);
+            int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
                 Limpiar();
