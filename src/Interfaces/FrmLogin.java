@@ -264,7 +264,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 Limpiar();
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Surgio un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Surgió un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -293,7 +293,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 Limpiar();
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Surgio un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Surgió un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -343,7 +343,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 Limpiar();
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Surgio un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Surgió un error" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
     

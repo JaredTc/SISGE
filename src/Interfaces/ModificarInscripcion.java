@@ -526,10 +526,10 @@ public class ModificarInscripcion extends javax.swing.JFrame {
         try {
             pst = conn.prepareStatement("UPDATE inscripcion SET id_alumno='" + id_alumno
                     + "',grupo='" + id_grupo + "',turno='" + id_turno + "',carrera='" + id_carrera + "' WHERE id_inscripcion='" + id_inscripcion + "'");
-            int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACION", 0);
+            int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Modificacion exitosa, para ver los cambios, recargue el formulario");
+                JOptionPane.showMessageDialog(null, "Modificación exitosa, para ver los cambios, recargue el formulario");
                 this.dispose();
             }
         } catch (HeadlessException | SQLException e) {

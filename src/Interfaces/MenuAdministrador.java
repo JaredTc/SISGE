@@ -201,10 +201,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-       int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de cerrar tu sesion?", "CONFIRMACION", 0);
+       int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de cerrar tu sesión?", "CONFIRMACION", 0);
         if (s == 0) {
             this.dispose();
-            JOptionPane.showMessageDialog(null, "!!HASTA PRONTO!!");
+            JOptionPane.showMessageDialog(null, "!!Hasta Pronto!!");
             FrmLogin login;
             try {
                 login = new FrmLogin();
