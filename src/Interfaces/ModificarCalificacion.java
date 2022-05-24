@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 public class ModificarCalificacion extends javax.swing.JFrame {
     Conectar con = new Conectar();
     Connection conn = con.conexion();
+    PreparedStatement pst;
     /**
      * Creates new form ModificarCalificacion
      */
@@ -178,7 +179,7 @@ public class ModificarCalificacion extends javax.swing.JFrame {
         String calificacion = txtcalificacion.getText();
                 String id = txtid.getText();
         try {
-             PreparedStatement pst = conn.prepareStatement("UPDATE toma SET calificacion='" + calificacion + "'WHERE id_calificacion='"+ id + "'");
+            pst = conn.prepareStatement("UPDATE toma SET calificacion='" + calificacion + "'WHERE id_calificacion='"+ id + "'");
                          int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el registro?", "CONFIRMACIÓN", 0);
                          if (s == 0) {
                 pst.executeUpdate();

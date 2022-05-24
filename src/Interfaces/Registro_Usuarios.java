@@ -16,14 +16,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Registro_Usuarios extends javax.swing.JInternalFrame {
-    
+
     Conectar condb = new Conectar();
     Connection conn = condb.conexion();
-    
+
     PreparedStatement pst;
     Statement st;
     ResultSet rs;
-    
+
     public Registro_Usuarios() throws SQLException {
         initComponents();
         MostrarRoles();
@@ -238,7 +238,7 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
     private void btn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarActionPerformed
         Limpiar();
     }//GEN-LAST:event_btn_cancelarActionPerformed
-    
+
     public void MostrarRoles() throws SQLException {
         st = conn.createStatement();
         try {
@@ -250,9 +250,9 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al mostrar " + e.getMessage());
         }
-        
+
     }
-    
+
     public void MostrarIdRoles() throws SQLException {
         st = conn.createStatement();
         try {
@@ -265,11 +265,11 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar " + e.getMessage());
         }
     }
-    
+
     public void BuscarIdXRol() throws SQLException {
-        
-        Statement st = conn.createStatement();
-        ResultSet rs;
+
+        st = conn.createStatement();
+
         try {
             String sql = "";
             switch (jcb_roles.getSelectedIndex()) {
@@ -317,11 +317,11 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage(), "Error en la BD", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void RegistrarUsuario() {
-        
+
         String sql = "INSERT INTO usuarios (usuario, password, id_rol, id_miembro) VALUES (?,?,?,?)";
-        try {            
+        try {
             st = conn.createStatement();
             rs = st.executeQuery("SELECT * FROM usuarios WHERE  usuario LIKE '" + txt_usuario.getText() + "' AND password LIKE '"
                     + txt_password2.getText() + "' AND id_rol LIKE '" + Integer.parseInt(lbl_idrol.getText()) + "'AND id_miembro LIKE '" + Integer.parseInt(txt_busqueda.getText()) + "'");
@@ -341,7 +341,7 @@ public class Registro_Usuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al ingresar registro: " + e.getMessage(), "Error en la BD", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public void Limpiar() {
         txt_busqueda.setText("");
         txt_password.setText("");

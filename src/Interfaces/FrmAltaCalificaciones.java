@@ -328,7 +328,7 @@ public final class FrmAltaCalificaciones extends javax.swing.JInternalFrame {
 
     public void Registrar(String idCurso, String idAlumno, String idGrupo, String turno, String semestre, String calificacion, String docente) {
         try {
-            PreparedStatement pst = conn.prepareStatement("INSERT INTO toma (id_curso, id_alumno, id_grupo, id_turno, id_semestre, calificacion, id_docente ) VALUES (?,?,?,?,?,?,?)");
+            pst = conn.prepareStatement("INSERT INTO toma (id_curso, id_alumno, id_grupo, id_turno, id_semestre, calificacion, id_docente ) VALUES (?,?,?,?,?,?,?)");
             pst.setString(1, idCurso);
             pst.setString(2, idAlumno);
             pst.setString(3, idGrupo);

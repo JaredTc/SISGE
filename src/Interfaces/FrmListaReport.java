@@ -153,7 +153,7 @@ public class FrmListaReport extends javax.swing.JInternalFrame {
             tabla.addCell("Materno");
             tabla.addCell("Asistencia");
 
-            try {
+            try (Statement st = conn.createStatement()) {
                 String sql = "SELECT  \n"
                         + "	 al.nombre, al.paterno,  al.materno \n"
                         + "	FROM alumno al, toma tm, curso cs\n"
@@ -162,7 +162,7 @@ public class FrmListaReport extends javax.swing.JInternalFrame {
                         + "	AND tm.id_grupo = '" + idGrupo + "'\n"
                         + "	AND tm.id_alumno = al.id_alumno\n"
                         + "	GROUP BY al.nombre";
-                Statement st = conn.createStatement();
+                
                 ResultSet rs = st.executeQuery(sql);
                 if (rs.next()) {
                     do {

@@ -16,7 +16,7 @@ public class ModificarAdministrador extends javax.swing.JFrame {
 
     Conectar con = new Conectar();
     Connection conn = con.conexion();
-    
+      PreparedStatement pst;
     /**
      * Creates new form ModificarAdministrador
      */
@@ -201,7 +201,7 @@ public class ModificarAdministrador extends javax.swing.JFrame {
         String paterno = txt_paterno.getText();
         String materno = txt_materno.getText();               
 
-        PreparedStatement pst = null;
+       pst = null;
         try {
             pst = conn.prepareStatement("UPDATE administrador SET nombre='" + nombre +"',paterno='" + paterno
                     + "',materno='" + materno + "' WHERE id_administrador='" + id + "'");

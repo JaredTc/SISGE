@@ -9,9 +9,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Modificar_Encargado extends javax.swing.JFrame {
-    
+
     Conectar con = new Conectar();
     Connection conn = con.conexion();
+    PreparedStatement pst;
 
     public Modificar_Encargado() {
         initComponents();
@@ -184,11 +185,11 @@ public class Modificar_Encargado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_modificarActionPerformed
 
-   public void recibir(String id, String paterno, String materno, String nombre) {
+    public void recibir(String id, String paterno, String materno, String nombre) {
         txt_id.setText(id);
         txt_paterno.setText(paterno);
         txt_materno.setText(materno);
-        txt_nombre.setText(nombre);        
+        txt_nombre.setText(nombre);
     }
 
     public void Modificar() throws SQLException {
@@ -197,19 +198,19 @@ public class Modificar_Encargado extends javax.swing.JFrame {
         String id = txt_id.getText();
         String paterno = txt_paterno.getText();
         String materno = txt_materno.getText();
-        String nombre = txt_nombre.getText();        
+        String nombre = txt_nombre.getText();
 
-        PreparedStatement pst = null;
+        pst = null;
         try {
             pst = conn.prepareStatement("UPDATE encargado SET paterno='" + paterno
-                    + "',materno='" + materno + "',nombre='" + nombre +  "' WHERE id_encargado='" + id + "'");
+                    + "',materno='" + materno + "',nombre='" + nombre + "' WHERE id_encargado='" + id + "'");
             int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de modificar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Datos modificados correctamente"); 
+                JOptionPane.showMessageDialog(null, "Datos modificados correctamente");
                 regen.MostrarRegistros("");
-                regen.setVisible(true);                
-                this.dispose();                
+                regen.setVisible(true);
+                this.dispose();
             }
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "ERROR", JOptionPane.ERROR_MESSAGE);

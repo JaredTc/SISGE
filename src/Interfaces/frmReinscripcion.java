@@ -490,8 +490,8 @@ public class frmReinscripcion extends javax.swing.JInternalFrame {
                 + " where i.id_alumno=a.id_alumno and c.id_carrera=g.carrera and i.grupo=g.id_grupo and i.turno=t.id_turno and i.id_alumno='" + id + "'";
 
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Datos encontrados");
                 lbl_paterno.setText(rs.getString("paterno"));
@@ -525,8 +525,8 @@ public class frmReinscripcion extends javax.swing.JInternalFrame {
     public void MostrarIDGrupos() {
         String sql = "SELECT id_grupo FROM grupos WHERE grupo ='" + jcb_grupos.getSelectedItem().toString() + "'";
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+             st = conn.createStatement();
+             rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_idgrupo.setText(rs.getString("id_grupo"));
             }
@@ -538,8 +538,8 @@ public class frmReinscripcion extends javax.swing.JInternalFrame {
     public void MostrarCarreras() {
         String sql = "SELECT descripcion FROM carrera";
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+             st = conn.createStatement();
+            rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_carrera.addItem(rs.getString("descripcion"));
             }
@@ -551,8 +551,8 @@ public class frmReinscripcion extends javax.swing.JInternalFrame {
     public void MostrarIDCarreras() {
         String sql = "SELECT id_carrera FROM carrera WHERE descripcion ='" + jcb_carrera.getSelectedItem().toString() + "'";
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+             st = conn.createStatement();
+             rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_idcarrera.setText(rs.getString("id_carrera"));
                 MostrarGrupoXCarrera();
@@ -672,7 +672,7 @@ public class frmReinscripcion extends javax.swing.JInternalFrame {
     }
 
     public void Eliminar() {
-        PreparedStatement pst = null;
+         pst = null;
         int fila = tbl_registros.getSelectedRow();
         String id = tbl_registros.getValueAt(fila, 0).toString();
         //Object id = btne;

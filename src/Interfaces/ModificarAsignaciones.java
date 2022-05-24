@@ -501,9 +501,9 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
     }
 
     public void MostrarSemestres() {
-        try {
+        try ( Statement st = conn.createStatement()) {
             String ssql = "SELECT descripcion FROM semestre";
-            Statement st = conn.createStatement();
+
             ResultSet rs = st.executeQuery(ssql);
             while (rs.next()) {
                 jcb_semestre.addItem(rs.getString("descripcion"));
@@ -514,9 +514,9 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
     }
 
     public void MostrarIDSemestres() {
-        try {
+        try ( Statement st = conn.createStatement()) {
             String ssql = "SELECT id_semestre FROM semestre WHERE descripcion='" + jcb_semestre.getSelectedItem().toString() + "'";
-            Statement st = conn.createStatement();
+
             ResultSet rs = st.executeQuery(ssql);
             while (rs.next()) {
                 lbl_semestre.setText(rs.getString("id_semestre"));
@@ -528,9 +528,8 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
 
     public void MostrarAsignaturas() throws SQLException {
         String query = "SELECT c.nombre as materia from curso c, semestre s WHERE c.semestre ='" + lbl_semestre.getText() + "'and s.id_semestre=c.semestre order by materia asc";
-        try {
+        try ( Statement st = conn.createStatement()) {
 
-            Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 jcb_curso.addItem(rs.getString("materia"));
@@ -542,8 +541,8 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
 
     public void MostrarIDAsignatura() {
         String sql = "SELECT id_curso FROM curso WHERE nombre ='" + jcb_curso.getSelectedItem().toString() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_asignatura1.setText(rs.getString("id_curso"));
@@ -557,8 +556,8 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
 
     public void MostrarTurnos() {
         String sql = "SELECT descripcion as turno from turno";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_turno.addItem(rs.getString("turno"));
@@ -570,8 +569,8 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
 
     public void MostrarIDTurno() {
         String sql = "SELECT id_turno FROM turno WHERE descripcion ='" + jcb_turno.getSelectedItem().toString() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_turno.setText(rs.getString("id_turno"));
@@ -584,8 +583,8 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
     public void MostrarGruposMatutinos() {
         String sql = "select g.grupo as grupo from grupos g, carrera c, semestre s where carrera='ISC' and semestre='"
                 + Integer.parseInt(lbl_semestre.getText()) + "' and g.grupo not like '%21' and s.id_semestre=g.semestre and c.id_carrera=g.carrera";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_grupo.addItem(rs.getString("grupo"));
@@ -599,8 +598,8 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
     public void MostrarGruposVespertinos() {
         String sql = "select g.grupo as grupo from grupos g, carrera c, semestre s where carrera='ISC' and semestre='"
                 + Integer.parseInt(lbl_semestre.getText()) + "' and g.grupo like '%21' and s.id_semestre=g.semestre and c.id_carrera=g.carrera";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_grupo.addItem(rs.getString("grupo"));
@@ -613,8 +612,8 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
 
     public void MostrarIDGrupo() {
         String sql = "SELECT id_grupo FROM grupos WHERE grupo ='" + jcb_grupo.getSelectedItem().toString() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_grupo1.setText(rs.getString("id_grupo"));
@@ -631,7 +630,7 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
         String id_semestre = lbl_semestre.getText();
         String id_grupo = lbl_grupo1.getText();
 
-        PreparedStatement pst = null;
+        pst = null;
         try {
             pst = conn.prepareStatement("UPDATE imparte SET id_docente='" + id_docente
                     + "',id_turno='" + id_turno + "',id_semestre='" + id_semestre + "',grupo='" + id_grupo + "' WHERE id_curso='" + id_curso + "'");
@@ -684,8 +683,8 @@ public class ModificarAsignaciones extends javax.swing.JFrame {
         String datos[] = new String[4];
         try {
             String sql = "SELECT id_docente, paterno, materno, nombre FROM docente ORDER BY id_docente ASC";
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(sql);
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
             while (rs.next()) {
                 datos[0] = rs.getString(1);
                 datos[1] = rs.getString(2);

@@ -16,7 +16,7 @@ public class ModificarAlumno extends javax.swing.JFrame {
 
     Conectar con = new Conectar();
     Connection conn = con.conexion();
-
+    PreparedStatement pst;
     public ModificarAlumno() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -216,7 +216,7 @@ public class ModificarAlumno extends javax.swing.JFrame {
         String nombre = txt_nombre.getText();
         String telefono = txt_telefono.getText();
 
-        PreparedStatement pst = null;
+         pst = null;
         try {
             pst = conn.prepareStatement("UPDATE alumno SET paterno='" + paterno
                     + "',materno='" + materno + "',nombre='" + nombre + "',telefono='" + telefono + "' WHERE id_alumno='" + id + "'");

@@ -174,13 +174,13 @@ public class FrmControReportes extends javax.swing.JInternalFrame {
             documento.open();
             documento.add(new Chunk(""));
 
-            try {
+            try ( Statement st = conn.createStatement()) {
                 String sql = "	SELECT al.nombre , al.paterno , al.materno \n"
                         + "	FROM alumno al, carrera cr\n"
                         + "	WHERE al.nombre ='" + Alumno + "' \n";
 //                        + "	AND cr.id_carrera = '"+ carrera+"'";
 //
-                Statement st = conn.createStatement();
+               
                 ResultSet rs = st.executeQuery(sql);
 
                 if (rs.next()) {

@@ -461,8 +461,8 @@ public class MenuAlumnos extends javax.swing.JFrame {
         String sql = "select i.id_alumno as id, g.grupo as grupo, s.descripcion as semestre, trn.descripcion as turno"
                 + " from alumno a, inscripcion i, grupos g, semestre s, turno trn"
                 + " where i.id_alumno='" + Integer.parseInt(lbl_idalumno.getText()) + "' and i.id_alumno=a.id_alumno and i.grupo=g.id_grupo and g.semestre=s.id_semestre and i.turno=trn.id_turno";
-        try {
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()){
+            
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_idsemestre.setText(rs.getString("id"));
@@ -486,8 +486,8 @@ public class MenuAlumnos extends javax.swing.JFrame {
                 + "AND tm.id_docente = d.id_docente\n"
                 + "and al.id_alumno='" + Integer.parseInt(lbl_idalumno.getText()) + "'\n"
                 + "ORDER BY id_toma ASC";
-        try {
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()) {
+            
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_promedio.setText(rs.getString("promedio"));
