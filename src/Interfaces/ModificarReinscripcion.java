@@ -453,8 +453,8 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
 
     public void MostrarCarreras() {
         String sql = "SELECT descripcion FROM carrera";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()){
+           
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_carrera.addItem(rs.getString("descripcion"));
@@ -467,8 +467,8 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
 
     public void MostrarCarreraXID() {
         String sql = "SELECT descripcion FROM carrera WHERE id_carrera='" + lbl_idcarrera.getText() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()) {
+            
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_carrera.setSelectedItem(rs.getString("descripcion"));
@@ -480,8 +480,8 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
 
     public void MostrarIDCarreras() {
         String sql = "SELECT id_carrera FROM carrera WHERE descripcion ='" + jcb_carrera.getSelectedItem().toString() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+           
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_idcarrera.setText(rs.getString("id_carrera"));
@@ -507,8 +507,8 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
 
     public void MostrarGrupoXID() {
         String sql = "SELECT grupo FROM grupos WHERE id_grupo='" + Integer.parseInt(lbl_idgrupo.getText()) + "'";
-        try {
-            Statement st = conn.createStatement();
+        try(Statement st = conn.createStatement()){
+            
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_grupos.setSelectedItem(rs.getString("grupo"));
@@ -520,8 +520,8 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
 
     public void MostrarIDGrupos() {
         String sql = "SELECT id_grupo FROM grupos WHERE grupo ='" + jcb_grupos.getSelectedItem().toString() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()){
+            
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_idgrupo.setText(rs.getString("id_grupo"));
@@ -550,7 +550,7 @@ public class ModificarReinscripcion extends javax.swing.JFrame {
         String id_turno = lbl_idturno.getText();
         String id_carrera = lbl_idcarrera.getText();
 
-        PreparedStatement pst = null;
+         pst = null;
         try {
             pst = conn.prepareStatement("UPDATE reinscripcion SET id_alumno='" + id_alumno
                     + "',grupo='" + id_grupo + "',turno='" + id_turno + "',carrera='" + id_carrera + "' WHERE id_reinscripcion='" + id_reinscripcion + "'");

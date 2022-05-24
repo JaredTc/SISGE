@@ -393,7 +393,7 @@ public class RegistroAdmnistradores extends javax.swing.JInternalFrame {
     }
 
     public void Eliminar() {
-        PreparedStatement pst = null;
+         pst = null;
         int fila = tbl_registros.getSelectedRow();
         String id = tbl_registros.getValueAt(fila, 0).toString();
         //Object id = btne;

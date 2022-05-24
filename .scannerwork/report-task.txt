@@ -2,5 +2,5 @@ projectKey=SISGE1
 serverUrl=http://localhost:9000
 serverVersion=9.4.0.54424
 dashboardUrl=http://localhost:9000/dashboard?id=SISGE1
-ceTaskId=AYDe5FZKLebnH5lE7d4N
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AYDe5FZKLebnH5lE7d4N
+ceTaskId=AYD03sqDT9k8qMrp5bUd
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYD03sqDT9k8qMrp5bUd

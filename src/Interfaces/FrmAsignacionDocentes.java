@@ -121,7 +121,7 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
         btn_cancelar.setBackground(new java.awt.Color(255, 51, 51));
         btn_cancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_cancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_cancelar.setText("CANCELAR");
+        btn_cancelar.setText("Cancelar");
         btn_cancelar.setBorderPainted(false);
         btn_cancelar.setDefaultCapable(false);
         btn_cancelar.setFocusPainted(false);
@@ -134,7 +134,7 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
         btn_registrar.setBackground(new java.awt.Color(90, 166, 255));
         btn_registrar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btn_registrar.setForeground(new java.awt.Color(255, 255, 255));
-        btn_registrar.setText("REGISTRAR");
+        btn_registrar.setText("Registrar");
         btn_registrar.setBorderPainted(false);
         btn_registrar.setDefaultCapable(false);
         btn_registrar.setFocusPainted(false);
@@ -154,7 +154,7 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
 
         lbl_turno.setText("jLabel7");
 
-        btn_cargar.setText("CARGAR DOCENTE");
+        btn_cargar.setText("Cargar Docente");
         btn_cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cargarActionPerformed(evt);
@@ -173,9 +173,6 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
                 .addGap(122, 122, 122))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel5))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -197,16 +194,19 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jcb_turno, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jcb_turno, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jcb_semestre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(lbl_semestre)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jcb_semestre, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lbl_semestre)))
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_cancelar)))
+                                .addComponent(btn_cancelar)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -506,9 +506,9 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_cargarActionPerformed
 
     public void MostrarSemestres() {
-        try {
+        try (Statement st = conn.createStatement()){
             String ssql = "SELECT descripcion FROM semestre";
-            Statement st = conn.createStatement();
+            
             ResultSet rs = st.executeQuery(ssql);
             while (rs.next()) {
                 jcb_semestre.addItem(rs.getString("descripcion"));
@@ -519,9 +519,9 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
     }
 
     public void MostrarIDSemestres() {
-        try {
+        try (  Statement st = conn.createStatement()){
             String ssql = "SELECT id_semestre FROM semestre WHERE descripcion='" + jcb_semestre.getSelectedItem().toString() + "'";
-            Statement st = conn.createStatement();
+          
             ResultSet rs = st.executeQuery(ssql);
             while (rs.next()) {
                 lbl_semestre.setText(rs.getString("id_semestre"));
@@ -533,9 +533,9 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
 
     public void MostrarAsignaturas() throws SQLException {
         String query = "SELECT c.nombre as materia from curso c, semestre s WHERE c.semestre ='" + lbl_semestre.getText() + "'and s.id_semestre=c.semestre order by materia asc";
-        try {
+        try ( Statement st = conn.createStatement()){
 
-            Statement st = conn.createStatement();
+           
             ResultSet rs = st.executeQuery(query);
             while (rs.next()) {
                 jcb_curso.addItem(rs.getString("materia"));
@@ -547,8 +547,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
 
     public void MostrarIDAsignatura() {
         String sql = "SELECT id_curso FROM curso WHERE nombre ='" + jcb_curso.getSelectedItem().toString() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try (   Statement st = conn.createStatement() ) {
+         
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_asignatura.setText(rs.getString("id_curso"));
@@ -562,8 +562,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
 
     public void MostrarTurnos() {
         String sql = "SELECT descripcion as turno from turno";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement() ) {
+           
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_turno.addItem(rs.getString("turno"));
@@ -575,8 +575,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
 
     public void MostrarIDTurno() {
         String sql = "SELECT id_turno FROM turno WHERE descripcion ='" + jcb_turno.getSelectedItem().toString() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement() ){
+           
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_turno.setText(rs.getString("id_turno"));
@@ -589,8 +589,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
     public void MostrarGruposMatutinos() {
         String sql = "select g.grupo as grupo from grupos g, carrera c, semestre s where carrera='ISC' and semestre='"
                 + Integer.parseInt(lbl_semestre.getText()) + "' and g.grupo not like '%21' and s.id_semestre=g.semestre and c.id_carrera=g.carrera";
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+           
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_grupo.addItem(rs.getString("grupo"));
@@ -604,8 +604,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
     public void MostrarGruposVespertinos() {
         String sql = "select g.grupo as grupo from grupos g, carrera c, semestre s where carrera='ISC' and semestre='"
                 + Integer.parseInt(lbl_semestre.getText()) + "' and g.grupo like '%21' and s.id_semestre=g.semestre and c.id_carrera=g.carrera";
-        try {
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()){
+            
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_grupo.addItem(rs.getString("grupo"));
@@ -618,8 +618,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
 
     public void MostrarIDGrupo() {
         String sql = "SELECT id_grupo FROM grupos WHERE grupo ='" + jcb_grupo.getSelectedItem().toString() + "'";
-        try {
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement() ){
+            
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_grupo.setText(rs.getString("id_grupo"));
@@ -672,8 +672,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
             sql="SELECT id_docente, paterno, materno, nombre FROM docente WHERE id_docente LIKE '%" + busqueda + "%' OR paterno LIKE'%" + busqueda + "%'OR materno LIKE'%" + busqueda + "%'OR nombre LIKE'%" + busqueda + "%'";   
         }
         String datos[] = new String[4];
-        try {           
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()){           
+            
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 datos[0] = rs.getString(1);
@@ -691,8 +691,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
     public void Asignar(String curso, int docente, String turno, int semestre, String grupo) {
         String sql = "INSERT INTO imparte (id_curso, id_docente, id_turno, id_semestre, grupo) VALUES (?,?,?,?,?)";
 
-        try {
-            Statement st = conn.createStatement();
+        try (Statement st = conn.createStatement()){
+            
             ResultSet rs = st.executeQuery("SELECT * FROM imparte WHERE id_curso LIKE '" + curso + "' AND id_docente LIKE '" + docente + "' AND id_turno LIKE '" + turno + "' AND id_semestre LIKE '" + semestre + "' AND grupo = '" + grupo + "'");
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "El docente ya ha sido asignado a esta asignatura, grupo y curso", "ERROR DE REGISTRO", JOptionPane.ERROR_MESSAGE);
@@ -750,8 +750,8 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
             sql = "SELECT * FROM imparte WHERE id_curso LIKE '%" + busqueda + "%' OR id_docente LIKE'%" + busqueda + "%'OR id_turno LIKE'%" + busqueda + "%'OR id_semestre LIKE'%" + busqueda + "%' OR grupo LIKE'%" + busqueda + "%'";
         }
         Object puestos[] = new Object[7];
-        try {
-            Statement st = conn.createStatement();
+        try ( Statement st = conn.createStatement()) {
+           
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
 
@@ -786,11 +786,11 @@ public class FrmAsignacionDocentes extends javax.swing.JInternalFrame {
     }
 
     public void Eliminar() {
-        PreparedStatement pst = null;
+      pst = null;
         int fila = tbl_registros.getSelectedRow();
         String id = tbl_registros.getValueAt(fila, 0).toString();
         //Object id = btne;
-        try {
+        try  {
             pst = conn.prepareStatement("DELETE FROM imparte WHERE id_curso='" + id + "'");
             int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el registro?", "CONFIRMACION", 0);
             if (s == 0) {

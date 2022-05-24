@@ -247,11 +247,11 @@ public class Modificar_Usuarios extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_cancelarActionPerformed
 
     private void btn_crearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_crearActionPerformed
-       if(txt_password2.getText().equals(txt_password.getText())){
-           Modificar(txt_usuario.getText(), txt_password2.getText(), Integer.parseInt(lbl_idrol.getText()));
-       }else{
-           JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden ","ERROR",JOptionPane.ERROR_MESSAGE);
-       }         
+        if (txt_password2.getText().equals(txt_password.getText())) {
+            Modificar(txt_usuario.getText(), txt_password2.getText(), Integer.parseInt(lbl_idrol.getText()));
+        } else {
+            JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden ", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btn_crearActionPerformed
 
     private void jcb_rolesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcb_rolesItemStateChanged
@@ -274,7 +274,7 @@ public class Modificar_Usuarios extends javax.swing.JInternalFrame {
         lbl_id.setText("");
         jPanel1.setVisible(false);
     }
-    
+
     public void MostrarRoles() throws SQLException {
         st = conn.createStatement();
         try {
@@ -301,14 +301,13 @@ public class Modificar_Usuarios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Error al mostrar " + e.getMessage());
         }
     }
-    
-     public void VerRolXId() {
 
-        try {
-            Statement s = conn.createStatement();
-            ResultSet rs = s.executeQuery("select descripcion from rol where id='" + lbl_idrol.getText() + "'");
+    public void VerRolXId() {
+
+        try ( Statement s = conn.createStatement()) {
+            rs = s.executeQuery("select descripcion from rol where id='" + lbl_idrol.getText() + "'");
             while (rs.next()) {
-                this.jcb_roles.setSelectedItem(rs.getString("descripcion"));               
+                this.jcb_roles.setSelectedItem(rs.getString("descripcion"));
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
@@ -317,11 +316,11 @@ public class Modificar_Usuarios extends javax.swing.JInternalFrame {
     }
 
     public void BuscarUsuario(String user) {
-       String sql="SELECT * FROM usuarios WHERE usuario ='"+user+"'";
+        String sql = "SELECT * FROM usuarios WHERE usuario ='" + user + "'";
         try {
-            Statement st = conn.createStatement();
-            ResultSet rs= st.executeQuery(sql);
-            if(rs.next()){
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            if (rs.next()) {
                 lbl_id.setText(rs.getString("id_usuario"));
                 txt_usuario.setText(rs.getString("usuario"));
                 txt_password.setText("password");
@@ -330,35 +329,35 @@ public class Modificar_Usuarios extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Datos encontrados");
                 jPanel1.setVisible(true);
                 VerRolXId();
-            }else{
-                JOptionPane.showMessageDialog(null, "No se encontraron coincidencias","ERROR",JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "No se encontraron coincidencias", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } catch (HeadlessException | SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al mostrar "+e.getMessage(),"ERROR",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al mostrar " + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    public void Modificar(String user, String passwd, int rol){ 
-        
-        int id = Integer.parseInt(lbl_id.getText());     
-        PreparedStatement pst = null;
+
+    public void Modificar(String user, String passwd, int rol) {
+
+        int id = Integer.parseInt(lbl_id.getText());
+        pst = null;
         try {
             pst = conn.prepareStatement("UPDATE usuarios SET usuario='" + user + "',password='" + passwd + "',id_rol='" + rol + "' WHERE id_usuario='" + id + "'");
             int s = JOptionPane.showConfirmDialog(null, "¿Estas seguro de modificar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();
-                JOptionPane.showMessageDialog(null, "Datos modificados correctamente");                             
+                JOptionPane.showMessageDialog(null, "Datos modificados correctamente");
                 Limpiar();
             }
         } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Ha ocurrido un error " + e, "ERROR", JOptionPane.ERROR_MESSAGE);
-        }    
+        }
     }
-    
-    public void Eliminar(int id){
-        String sql = "DELETE FROM usuarios WHERE id_usuario = '"+id+"'";
+
+    public void Eliminar(int id) {
+        String sql = "DELETE FROM usuarios WHERE id_usuario = '" + id + "'";
         try {
-            pst= conn.prepareStatement(sql);
+            pst = conn.prepareStatement(sql);
             int s = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar el registro?", "CONFIRMACIÓN", 0);
             if (s == 0) {
                 pst.executeUpdate();

@@ -4,16 +4,24 @@
  */
 package Interfaces;
 
+import Render.Render;
 import conexion.Conectar;
 import java.awt.Color;
+import java.awt.HeadlessException;
 import java.awt.image.BufferedImage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
@@ -28,6 +36,10 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
     PreparedStatement pst;
     Statement st;
     ResultSet rs;
+    Statement sentecnia;
+    Statement snt;
+    Statement la, Gst, mc;
+    ResultSet mca, gast;
 
     /**
      * Creates new form ConsultaYEstadisticas
@@ -38,7 +50,9 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
         Cursos();
         Docentes();
         Graficar();
-
+        Ocultar();
+        TableCalificaciones("");
+        BarGrafic();
     }
 
     /**
@@ -65,10 +79,15 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jPanelGrafica = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jComboBoxCOnsulta = new javax.swing.JComboBox<>();
+        jTextFieldCalificacion = new javax.swing.JTextField();
+        lbl_calif = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
 
         setClosable(true);
         setIconifiable(true);
@@ -79,7 +98,7 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Teacher.png"))); // NOI18N
         jLabel5.setToolTipText("");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Alumnos");
@@ -91,15 +110,15 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Docentes");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, -1, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, 20));
 
         lbl_profesores.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         lbl_profesores.setText("jLabel8");
-        jPanel1.add(lbl_profesores, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, -1, 20));
+        jPanel1.add(lbl_profesores, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, -1, 20));
 
         lbl_alumnos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_alumnos.setText("...........");
-        jPanel1.add(lbl_alumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, 40, 20));
+        jPanel1.add(lbl_alumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 50, 20));
 
         lbl_cursos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbl_cursos.setText(".................");
@@ -119,7 +138,7 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Rectangle 24.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, -1, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/Rectangle 23(1).png"))); // NOI18N
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
@@ -128,12 +147,9 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
         jLabel10.setText("Alumnos");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, -1));
 
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 220, -1));
-
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel12.setText("Busqueda");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(90, 166, 255));
         jButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -143,30 +159,131 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
         jButton1.setBorderPainted(false);
         jButton1.setDefaultCapable(false);
         jButton1.setFocusPainted(false);
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 110, 30));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 430, 110, 30));
 
         javax.swing.GroupLayout jPanelGraficaLayout = new javax.swing.GroupLayout(jPanelGrafica);
         jPanelGrafica.setLayout(jPanelGraficaLayout);
         jPanelGraficaLayout.setHorizontalGroup(
             jPanelGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+            .addGap(0, 550, Short.MAX_VALUE)
         );
         jPanelGraficaLayout.setVerticalGroup(
             jPanelGraficaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanelGrafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, 360, 240));
+        jPanel1.add(jPanelGrafica, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 550, 220));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 620));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 560, 170));
+
+        jComboBoxCOnsulta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Docentes", "Alumnos", "Calificacion", "Inscripciones", "Reinscripciones" }));
+        jComboBoxCOnsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxCOnsultaMouseClicked(evt);
+            }
+        });
+        jComboBoxCOnsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCOnsultaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jComboBoxCOnsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 210, 30));
+        jPanel1.add(jTextFieldCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 80, 30));
+
+        lbl_calif.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_calif.setText("Calificacion");
+        jPanel1.add(lbl_calif, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 410, -1, -1));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 330, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, 330, 250));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String Query = (String) jComboBoxCOnsulta.getSelectedItem();
+        String calif = jTextFieldCalificacion.getText();
+
+        Consultas(Query, calif);
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBoxCOnsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxCOnsultaMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jComboBoxCOnsultaMouseClicked
+
+    private void jComboBoxCOnsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCOnsultaActionPerformed
+        // TODO add your handling code here:
+        MostrarCampos();
+    }//GEN-LAST:event_jComboBoxCOnsultaActionPerformed
+
+    private void MostrarCampos() {
+        String Query = (String) jComboBoxCOnsulta.getSelectedItem();
+        if (Query.equals("Calificacion")) {
+            jTextFieldCalificacion.setVisible(true);
+            lbl_calif.setVisible(true);
+
+        }
+        if (Query.equals("Alumnos")) {
+
+            jTextFieldCalificacion.setVisible(false);
+            lbl_calif.setVisible(false);
+//        } else {
+//            Ocultar();
+//        }
+
+        }
+        if (Query.equals("Docentes")) {
+            Ocultar();
+        }
+        if (Query.equals("Inscripciones")) {
+            Ocultar();
+        }
+        if (Query.equals("Reinscripciones")) {
+            Ocultar();
+        }
+    }
+
+    private void Ocultar() {
+        jTextFieldCalificacion.setVisible(false);
+        lbl_calif.setVisible(false);
+
+    }
+
     private void Alumnos() {
-        try {
+        try ( Statement st = conn.createStatement()) {
             String sql = "SELECT COUNT(*) FROM alumno";
-            Statement st = conn.createStatement();
+
             ResultSet rs = st.executeQuery(sql);
 
             if (rs.next()) {
@@ -177,10 +294,22 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
         }
     }
 
+//    public void MostrarSemestres() {
+//        try ( Statement st = conn.createStatement()) {
+//            String ssql = "SELECT descripcion FROM semestre";
+//
+//            ResultSet rs = st.executeQuery(ssql);
+//            while (rs.next()) {
+//                jComboBoxSemestre.addItem(rs.getString("descripcion"));
+//            }
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "Error al cargar registros " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+//        }
+//    }
     private void Cursos() {
-        try {
+        try ( Statement st = conn.createStatement()) {
             String sql = "SELECT COUNT(*) FROM curso";
-            Statement st = conn.createStatement();
+
             ResultSet rs = st.executeQuery(sql);
 
             if (rs.next()) {
@@ -192,9 +321,8 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
     }
 
     private void Docentes() {
-        try {
+        try ( Statement st = conn.createStatement();) {
             String sql = "SELECT COUNT(*) FROM docente";
-            Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
 
             if (rs.next()) {
@@ -204,10 +332,9 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
         } catch (Exception e) {
         }
     }
-    DefaultPieDataset data = new DefaultPieDataset();
 
     private void Graficar() {
-
+        DefaultPieDataset data = new DefaultPieDataset();
 //        JFreeChart barra = null;
 //        DefaultCategoryDataset datos;
 //        datos = new DefaultCategoryDataset();
@@ -217,34 +344,33 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
         try {
             st = conn.createStatement();
             rs = st.executeQuery(query);
-            Statement sentecnia = conn.createStatement();
+            sentecnia = conn.createStatement();
             ResultSet resultado = sentecnia.executeQuery(qry);
-            Statement snt = conn.createStatement();
+            snt = conn.createStatement();
             ResultSet rst = snt.executeQuery(qy);
-            
-            if (rs.next() ) {
+
+            if (rs.next()) {
                 data.setValue("100", Integer.parseInt(rs.getString("Excelencia")));
-             
-              
+
             }
-             if ( resultado.next()) {
-                   data.setValue("80-99", Integer.parseInt(resultado.getString("Regular")));
+            if (resultado.next()) {
+                data.setValue("80-99", Integer.parseInt(resultado.getString("Regular")));
             }
-             if ( rst.next()) {
-                  data.setValue("70-79", Integer.parseInt(rst.getString("BAJO")));
+            if (rst.next()) {
+                data.setValue("70-79", Integer.parseInt(rst.getString("BAJO")));
             }
             JFreeChart chart = ChartFactory.createPieChart(
-                    "Calificaciones Generales", // Título del gráfico
+                    "Promedios Generales", // Título del gráfico
                     data, // DataSet
-                    true, // Leyenda
-                    true, // ToolTips
-                    true);
+                    false, // Leyenda
+                    false, // ToolTips
+                    false);
 
 // Mostrando el gráfico en un jPanel
-            this.jPanelGrafica.removeAll();
-            this.jPanelGrafica.setLayout(new java.awt.BorderLayout());
-            this.jPanelGrafica.add(new ChartPanel(chart)); 
-            this.jPanelGrafica.validate();
+            this.jPanel2.removeAll();
+            this.jPanel2.setLayout(new java.awt.BorderLayout());
+            this.jPanel2.add(new ChartPanel(chart));
+            this.jPanel2.validate();
 
         } catch (Exception e) {
         }
@@ -252,8 +378,348 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
 
     }
 
+    private void Consultas(String Query, String calif) {
+        try {
+            String opcion = Query;
+            if (opcion.equals("Calificacion")) {
+
+                TableCalificaciones(calif);
+                Graficar();
+            }
+            if (opcion.equals("Docentes")) {
+                Docent();
+            }
+            if (opcion.equals("Alumnos")) {
+                MostrarRegistros();
+
+            }
+            if (opcion.equals("Inscripciones")) {
+                BarGrafic();
+                Inscripcion();
+
+//                GraficarInscripcion();
+            }
+            if (opcion.equals("Reinscripciones")) {
+                Reinscripcion();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    public void TableCalificaciones(String calif) {
+
+        DefaultTableModel Tabgdo = new DefaultTableModel();
+        Tabgdo.addColumn("ID");
+        Tabgdo.addColumn("Curso");
+        Tabgdo.addColumn("Alumno");
+        Tabgdo.addColumn("Grupo");
+        Tabgdo.addColumn("Turno");
+        Tabgdo.addColumn("Semestre");
+        Tabgdo.addColumn("Calificacion");
+        Tabgdo.addColumn("Docente");
+
+        jTable1.setModel(Tabgdo);
+
+        Object[] calificaciones = new Object[8];
+        String sql = "";
+        try {
+            if (calif.equals("")) {
+                sql = ("SELECT tm.id_toma, c.nombre, al.nombre, gp.grupo, trn.descripcion , tm.calificacion, sm.descripcion, d.nombre\n"
+                        + "	FROM toma tm, curso c, alumno al, grupos gp, turno trn , semestre sm, docente d\n"
+                        + "	WHERE tm.id_curso = c.id_curso\n"
+                        + "	AND tm.id_alumno = al.id_alumno\n"
+                        + "	AND tm.id_grupo = gp.id_grupo\n"
+                        + "	AND tm.id_turno = trn.id_turno\n"
+                        + "	AND tm.id_semestre = sm.id_semestre\n"
+                        + "AND tm.id_docente = d.id_docente\n"
+                        + "	ORDER BY id_toma ASC");
+            } else {
+                sql = ("SELECT tm.id_toma, c.nombre, al.nombre, gp.grupo, trn.descripcion , tm.calificacion, sm.descripcion, d.nombre\n"
+                        + "	FROM toma tm, curso c, alumno al, grupos gp, turno trn , semestre sm, docente d\n"
+                        + "	WHERE tm.id_curso = c.id_curso\n"
+                        + "	AND tm.id_alumno = al.id_alumno\n"
+                        + "	AND tm.id_grupo = gp.id_grupo\n"
+                        + "	AND tm.id_turno = trn.id_turno\n"
+                        + "	AND tm.id_semestre = sm.id_semestre\n"
+                        + "AND tm.id_docente = d.id_docente\n"
+                        + "AND tm.calificacion ='" + calif + "'\n"
+                        + "	ORDER BY id_toma ASC");
+            }
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                calificaciones[0] = rs.getString("tm.id_toma");
+                calificaciones[1] = rs.getString("c.nombre");
+                calificaciones[2] = rs.getString("al.nombre");
+                calificaciones[3] = rs.getString("gp.grupo");
+                calificaciones[4] = rs.getString("trn.descripcion");
+                calificaciones[5] = rs.getString("sm.descripcion");
+                calificaciones[6] = rs.getString("calificacion");
+                calificaciones[7] = rs.getString("d.nombre");
+
+                Tabgdo.addRow(calificaciones);
+            }
+            jTable1.setModel(Tabgdo);
+
+        } catch (HeadlessException | SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    public void Docent() {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Paterno");
+        modelo.addColumn("Materno");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Email");
+        modelo.addColumn("Rol");
+
+        jTable1.setModel(modelo);
+        String sql = "";
+//        if (busqueda.equals("")) {
+        sql = "SELECT * FROM docente ORDER BY id_docente ASC";
+//        } else {
+//            sql = "SELECT * FROM docente WHERE id_docente LIKE '%" + busqueda + "%' OR paterno LIKE'%" + busqueda + "%'OR materno LIKE'%" + busqueda + "%'OR nombre LIKE'%" + busqueda
+//                    + "%'OR telefono LIKE'%" + busqueda + "%'OR correo LIKE'%" + busqueda + "%' OR id_rol LIKE'%" + busqueda + "%'";
+//        }
+        Object puestos[] = new Object[8];
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+
+                puestos[0] = rs.getString(1);
+                puestos[1] = rs.getString(2);
+                puestos[2] = rs.getString(3);
+                puestos[3] = rs.getString(4);
+                puestos[4] = rs.getString(5);
+                puestos[5] = rs.getString(6);
+                puestos[6] = rs.getString(7);
+
+                modelo.addRow(puestos);
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException e) {
+        }
+    }
+
+    public void MostrarRegistros() {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Paterno");
+        modelo.addColumn("Materno");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Telefono");
+        modelo.addColumn("Rol");
+        jTable1.setModel(modelo);
+        String sql = "";
+
+        sql = "SELECT * FROM alumno ORDER BY id_alumno ASC";
+
+        Object puestos[] = new Object[6];
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+
+                puestos[0] = rs.getString(1);
+                puestos[1] = rs.getString(2);
+                puestos[2] = rs.getString(3);
+                puestos[3] = rs.getString(4);
+                puestos[4] = rs.getString(5);
+                puestos[5] = rs.getString(6);
+
+                modelo.addRow(puestos);
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException e) {
+        }
+  
+    }
+
+    public void Inscripcion() {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("id_alumno");
+        modelo.addColumn("Grupo");
+        modelo.addColumn("Turno");
+        modelo.addColumn("Carrera");
+
+        jTable1.setModel(modelo);
+        String sql = "";
+//        if (busqueda.equals("")) {
+        sql = "SELECT * FROM inscripcion ORDER BY id_inscripcion ASC";
+//        } else {
+//            sql = "SELECT * FROM docente WHERE id_docente LIKE '%" + busqueda + "%' OR paterno LIKE'%" + busqueda + "%'OR materno LIKE'%" + busqueda + "%'OR nombre LIKE'%" + busqueda
+//                    + "%'OR telefono LIKE'%" + busqueda + "%'OR correo LIKE'%" + busqueda + "%' OR id_rol LIKE'%" + busqueda + "%'";
+//        }
+        Object puestos[] = new Object[5];
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+
+                puestos[0] = rs.getString(1);
+                puestos[1] = rs.getString(2);
+                puestos[2] = rs.getString(3);
+                puestos[3] = rs.getString(4);
+                puestos[4] = rs.getString(5);
+
+                modelo.addRow(puestos);
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException e) {
+        }
+    }
+
+    public void Reinscripcion() {
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("id_alumno");
+        modelo.addColumn("Grupo");
+        modelo.addColumn("Turno");
+        modelo.addColumn("Carrera");
+
+        jTable1.setModel(modelo);
+        String sql = "";
+//        if (busqueda.equals("")) {
+        sql = "SELECT * FROM reinscripcion ORDER BY id_reinscripcion ASC";
+//        } else {
+//            sql = "SELECT * FROM docente WHERE id_docente LIKE '%" + busqueda + "%' OR paterno LIKE'%" + busqueda + "%'OR materno LIKE'%" + busqueda + "%'OR nombre LIKE'%" + busqueda
+//                    + "%'OR telefono LIKE'%" + busqueda + "%'OR correo LIKE'%" + busqueda + "%' OR id_rol LIKE'%" + busqueda + "%'";
+//        }
+        Object puestos[] = new Object[5];
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
+            while (rs.next()) {
+
+                puestos[0] = rs.getString(1);
+                puestos[1] = rs.getString(2);
+                puestos[2] = rs.getString(3);
+                puestos[3] = rs.getString(4);
+                puestos[4] = rs.getString(5);
+
+                modelo.addRow(puestos);
+            }
+            jTable1.setModel(modelo);
+        } catch (SQLException e) {
+        }
+    }
+
+    private void GraficarInscripcion() {
+        DefaultPieDataset data = new DefaultPieDataset();
+
+        String query = "SELECT COUNT(id_inscripcion) AS sistemas FROM  inscripcion WHERE carrera = 'ISC'";
+        String qry = "SELECT COUNT(id_inscripcion) AS animacion FROM  inscripcion WHERE carrera= 'ADyEV'";
+        String qy = "SELECT COUNT(id_inscripcion) AS quimica FROM  inscripcion WHERE carrera = 'IQ'";
+        String q = "SELECT COUNT(id_inscripcion) AS admin FROM  inscripcion WHERE carrera = 'LA'";
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+            sentecnia = conn.createStatement();
+            ResultSet resultado = sentecnia.executeQuery(qry);
+            snt = conn.createStatement();
+            ResultSet rst = snt.executeQuery(qy);
+            la = conn.createStatement();
+            ResultSet rsla = la.executeQuery(q);
+            if (rs.next()) {
+                data.setValue("ISC", Integer.parseInt(rs.getString("sistemas")));
+
+            }
+            if (resultado.next()) {
+                data.setValue("ADyEV", Integer.parseInt(resultado.getString("animacion")));
+            }
+            if (rst.next()) {
+                data.setValue("IQ", Integer.parseInt(rst.getString("quimica")));
+            }
+            if (rsla.next()) {
+                data.setValue("LA", Integer.parseInt(rsla.getString("admin")));
+            }
+            JFreeChart chart = ChartFactory.createPieChart(
+                    "Inscripciones", // Título del gráfico
+                    data, // DataSet
+                    false, // Leyenda
+                    false, // ToolTips
+                    false);
+
+// Mostrando el gráfico en un jPanel
+            this.jPanelGrafica.removeAll();
+            this.jPanelGrafica.setLayout(new java.awt.BorderLayout());
+            this.jPanelGrafica.add(new ChartPanel(chart));
+            this.jPanelGrafica.validate();
+
+        } catch (Exception e) {
+        }
+    }
+
+    private void BarGrafic() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+//             getContentPane().add(jPanelGrafica);
+        String query = "SELECT COUNT(id_inscripcion) AS sistemas FROM  inscripcion WHERE carrera = 'ISC'";
+        String qry = "SELECT COUNT(id_inscripcion) AS animacion FROM  inscripcion WHERE carrera= 'ADyEV'";
+        String qy = "SELECT COUNT(id_inscripcion) AS quimica FROM  inscripcion WHERE carrera = 'IQ'";
+        String q = "SELECT COUNT(id_inscripcion) AS admin FROM  inscripcion WHERE carrera = 'LA'";
+        String mec = "SELECT COUNT(id_inscripcion) AS meca FROM  inscripcion WHERE carrera = 'IM'";
+        String Lg = "SELECT COUNT(id_inscripcion) AS gastro FROM  inscripcion WHERE carrera = 'LG'";
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+            sentecnia = conn.createStatement();
+            ResultSet resultado = sentecnia.executeQuery(qry);
+            snt = conn.createStatement();
+            ResultSet rst = snt.executeQuery(qy);
+            la = conn.createStatement();
+            ResultSet rsla = la.executeQuery(q);
+            mc = conn.createStatement();
+            mca = mc.executeQuery(mec);
+            Gst = conn.createStatement();
+            gast = Gst.executeQuery(Lg);
+            if (rs.next()) {
+                dataset.setValue(Integer.parseInt(rs.getString("sistemas")), "ISC", "ISC");
+            }
+            if (resultado.next()) {
+                dataset.setValue(Integer.parseInt(resultado.getString("animacion")), "ADyEV", "ADyEV");
+            }
+            if (rst.next()) {
+
+                dataset.setValue(Integer.parseInt(rst.getString("quimica")), "IQ", "IQ");
+            }
+            if (rsla.next()) {
+                dataset.setValue(Integer.parseInt(rsla.getString("admin")), "LA", "LA");
+            }
+            if (mca.next()) {
+                dataset.setValue(Integer.parseInt(mca.getString("meca")), "IMC", "IMC");
+            }
+            if (gast.next()) {
+                dataset.setValue(Integer.parseInt(gast.getString("gastro")), "LG", "LG");
+            }
+        } catch (Exception e) {
+        }
+
+        // Creando el Grafico
+        JFreeChart chart = ChartFactory.createBarChart3D("Alumnos Inscritos", "Carreras", "Total",
+        dataset, PlotOrientation.VERTICAL, false, false, false);
+        chart.getTitle().setPaint(Color.black);
+        CategoryPlot p = chart.getCategoryPlot();
+        p.setRangeGridlinePaint(Color.red);
+        // Mostrar Grafico
+        ChartPanel chartPanel = new ChartPanel(chart);
+        jPanelGrafica.add(chartPanel);
+        jPanelGrafica.setLayout(new java.awt.BorderLayout());
+        jPanelGrafica.add(new ChartPanel(chart));
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBoxCOnsulta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -267,9 +733,13 @@ public class ConsultaYEstadisticas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelGrafica;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFieldCalificacion;
     private javax.swing.JLabel lbl_alumnos;
+    private javax.swing.JLabel lbl_calif;
     private javax.swing.JLabel lbl_cursos;
     private javax.swing.JLabel lbl_profesores;
     // End of variables declaration//GEN-END:variables

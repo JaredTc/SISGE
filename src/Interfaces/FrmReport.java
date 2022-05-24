@@ -171,7 +171,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
             table.addCell("Calificacion");
             table.addCell("Firma");
 
-            try {
+            try (  Statement st = conn.createStatement()){
                 String sql = "SELECT  \n"
                         + "	 al.nombre, al.paterno,  al.materno, tm.calificacion \n"
                         + "	FROM alumno al, toma tm, curso cs\n"
@@ -181,7 +181,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
                         + "	AND tm.id_alumno = al.id_alumno\n"
                         + "	GROUP BY al.nombre";
 
-                Statement st = conn.createStatement();
+              
                 ResultSet rs = st.executeQuery(sql);
 
                 if (rs.next()) {
@@ -209,11 +209,11 @@ public class FrmReport extends javax.swing.JInternalFrame {
                     documento.add(p);
                     documento.add(Chunk.NEWLINE);
 
-                    try {
+                    try  {
                         String query = "SELECT cs.nombre FROM curso cs , toma tm\n"
                                 + "	WHERE cs.id_curso ='" + idCurso + "'\n"
                                 + "	GROUP BY nombre ";
-                        st = conn.createStatement();
+                        
                         rs = st.executeQuery(query);
 
                         if (rs.next()) {
@@ -242,7 +242,7 @@ public class FrmReport extends javax.swing.JInternalFrame {
             }
 
             documento.close();
-            JOptionPane.showMessageDialog(null, "Reporte creado con éxito en el escritorio");
+            JOptionPane.showMessageDialog(null, "Reporte creado con éxito ");
         } catch (Exception e) {
         }
     }
