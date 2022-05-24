@@ -540,8 +540,8 @@ public final class frmInscripcion extends javax.swing.JInternalFrame {
     public void MostrarGrupoXCarrera() {
         String sql = "select g.grupo from grupos g, carrera c where g.carrera=c.id_carrera and g.grupo like '1%' and g.carrera='" + lbl_idcarrera.getText() + "'";
         try {
-            st = conn.createStatement();
-            rs = st.executeQuery(sql);
+            Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_grupos.addItem(rs.getString("g.grupo"));
             }
@@ -552,9 +552,9 @@ public final class frmInscripcion extends javax.swing.JInternalFrame {
 
     public void MostrarIDGrupos() {
         String sql = "SELECT id_grupo FROM grupos WHERE grupo ='" + jcb_grupos.getSelectedItem().toString() + "'";
-        try (Statement st = conn.createStatement()) {
-            
-        rs = st.executeQuery(sql);
+        try {
+            Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_idgrupo.setText(rs.getString("id_grupo"));
             }
@@ -566,8 +566,8 @@ public final class frmInscripcion extends javax.swing.JInternalFrame {
     public void MostrarCarreras() {
         String sql = "SELECT descripcion FROM carrera";
         try {
-       st = conn.createStatement();
-             rs = st.executeQuery(sql);
+         Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 jcb_carrera.addItem(rs.getString("descripcion"));
             }
@@ -579,8 +579,8 @@ public final class frmInscripcion extends javax.swing.JInternalFrame {
     public void MostrarIDCarreras() {
         String sql = "SELECT id_carrera FROM carrera WHERE descripcion ='" + jcb_carrera.getSelectedItem().toString() + "'";
         try {
-            st = conn.createStatement();
-          rs = st.executeQuery(sql);
+           Statement st = conn.createStatement();
+         ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 lbl_idcarrera.setText(rs.getString("id_carrera"));
                 MostrarGrupoXCarrera();
